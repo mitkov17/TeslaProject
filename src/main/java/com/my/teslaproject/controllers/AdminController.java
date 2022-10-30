@@ -139,5 +139,4 @@ public class AdminController {
         productsService.delete(id);
         return "redirect:/admin/adminPage";
     }
-
 }

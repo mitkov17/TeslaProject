@@ -8,8 +8,30 @@
         $('.remove-product').click(removeProductFromCart);
     };
 
+    /*var showAddProductPopup = function () {
+        var idProduct = $(this).attr('id');
+        var product = $('#product' + idProduct);
+        $('#addProductPopup').attr('data-id-product', idProduct);
+        $('#addProductPopup .product-image').attr('src', product.find('.thumbnail img').attr('src'));
+        $('#addProductPopup .name').text(product.find('.nameTr').text());
+        var price = product.find('.pricePark').text();
+
+        $('#addProductPopup .pricePark').text(price);
+
+        $('#addProductPopup .brandPark').text(product.find('.brandPark').text());
+        $('#addProductPopup .modelPark').text(product.find('.modelPark').text());
+        $('#addProductPopup .materialPark').text(product.find('.materialPark').text());
+        $('#addProductPopup .lengthPark').text(product.find('.lengthPark').text());
+        $('#addProductPopup .count').val(1);
+        $('#addProductPopup .costPark').text(price);
+
+        $('#addProductPopup').modal({
+            show:true
+        });
+    };*/
+
     var showAddProductPopup = function () {
-        var idProduct = $(this).attr('data-id-product');
+        var idProduct = $(this).attr('id');
         var product = $('#product' + idProduct);
         $('#addProductPopup').attr('data-id-product', idProduct);
         $('#addProductPopup .product-image').attr('src', product.find('.thumbnail img').attr('src'));

@@ -25,5 +25,4 @@ public class ShopController {
         model.addAttribute("products", productsService.findAll());
         return "shop";
     }
-
 }
