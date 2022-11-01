@@ -41,6 +41,10 @@ public class ProductsService {
         return productsRepository.findByBrand(brand);
     }
 
+    public List<Product> findByProductName(String productName) {
+        return productsRepository.findByProductNameStartingWith(productName);
+    }
+
     public Product findOne(int id) {
         Optional<Product> foundProduct = productsRepository.findById(id);
         return foundProduct.orElse(null);

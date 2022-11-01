@@ -35,15 +35,15 @@
 <div class="container-fluid">
     <div class="row">
         <aside class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
-            <form class="search" action="carPark.html">
+            <form th:method="POST" class="search" th:action="@{/shop/search}">
                 <div class="panel panel-success panel-aside-my">
                     <div class="panel-heading panel-my-header">Найти товар</div>
                     <div class="panel-body">
                         <div class="list-body">
                             <div class="input-group mb-3">
-                                <input type="text" name="query" class="form-control" placeholder="Искать товар" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" id="query" name="query" class="form-control" placeholder="Искать товар" aria-label="" aria-describedby="basic-addon1">
                                 <div class="input-group-prepend">
-                                    <a id="goSearch" href="#" role="button" class="btn btn-success">Go!</a>
+                                    <input type="submit" id="goSearch" value="Go!" class="btn btn-success">
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                         <div class="panel panel-default product">
                             <div class="panel-body">
                                 <div class="thumbnail">
-                                    <img th:src="${product.getPathToImg()}" alt="icon1" class="d-block w-100">
+                                    <img th:src="${product.getPathToImg()}" alt="Icon" class="d-block w-100">
                                 </div>
                                 <h4 th:text="${product.getBrand()} + ' ' + ${product.getProductName()}" class="nameTr">product</h4>
                                 <hr>
