@@ -37,17 +37,9 @@ public class ProductsService {
         }
     }
 
-    /*public List<Product> findAllWithSortByPrice(boolean sortByPrice) {
-        if (sortByPrice) {
-            return productsRepository.findAll(Sort.by("price"));
-        } else {
-            return productsRepository.findAll(Sort.by(Sort.Direction.DESC, "price"));
-        }
+    public List<Product> findAllByBrand(String brand) {
+        return productsRepository.findByBrand(brand);
     }
-
-    public List<Product> findAllWithSortById() {
-        return productsRepository.findAll(Sort.by("id"));
-    }*/
 
     public Product findOne(int id) {
         Optional<Product> foundProduct = productsRepository.findById(id);

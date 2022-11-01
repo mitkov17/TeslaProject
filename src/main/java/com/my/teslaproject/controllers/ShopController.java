@@ -23,28 +23,14 @@ public class ShopController {
         this.productsService = productsService;
     }
 
-    /*@GetMapping()
-    public String shopPage(Model model, @RequestParam(value = "sort_by_price", required = false) boolean sortByPrice,
-                           @RequestParam(value = "sort_by_id", required = false) boolean sortById) {
-        if (sortByPrice && !sortById) {
-            model.addAttribute("products", productsService.findAllWithSortByPrice(true));
-        } else if (!sortByPrice && !sortById) {
-            model.addAttribute("products", productsService.findAllWithSortByPrice(false));
-        } else if (sortById) {
-            model.addAttribute("products", productsService.findAllWithSortById());
-        }
-        return "shop";
-    }*/
-
     @GetMapping()
-    public String shopPage(Model model, @RequestParam(value = "sort_by", required = false) String sortBy) {
-        if (Objects.equals(sortBy, "priceA")) {
-            model.addAttribute("products", productsService.findAllWithSort("priceA"));
-        } else if (Objects.equals(sortBy, "priceD")) {
-            model.addAttribute("products", productsService.findAllWithSort("priceD"));
-        } else {
-            model.addAttribute("products", productsService.findAllWithSort("idd"));
-        }
+    public String shopPage(Model model, @RequestParam(value = "sort_by", required = false) String sortBy,
+                           @RequestParam(value = "find_by_brand", required = false) String brand) {
+
+        if (brand != null) model.addAttribute("products", productsService.findAllByBrand(brand));
+
+        else model.addAttribute("products", productsService.findAllWithSort(sortBy));
+
         return "shop";
     }
 }
