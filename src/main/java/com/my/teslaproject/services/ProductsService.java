@@ -3,6 +3,7 @@ package com.my.teslaproject.services;
 import com.my.teslaproject.models.Product;
 import com.my.teslaproject.repositories.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,18 @@ public class ProductsService {
 
     public List<Product> findAll() {
         return productsRepository.findAll();
+    }
+
+    public List<Product> findAllWithSortByPrice(boolean sortByPrice) {
+        if (sortByPrice) {
+            return productsRepository.findAll(Sort.by("price"));
+        } else {
+            return productsRepository.findAll(Sort.by(Sort.Direction.DESC, "price"));
+        }
+    }
+
+    public List<Product> findAllWithSortById() {
+        return productsRepository.findAll(Sort.by("id"));
     }
 
     public Product findOne(int id) {
