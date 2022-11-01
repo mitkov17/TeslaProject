@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -26,7 +27,17 @@ public class ProductsService {
         return productsRepository.findAll();
     }
 
-    public List<Product> findAllWithSortByPrice(boolean sortByPrice) {
+    public List<Product> findAllWithSort(String sortBy) {
+        if (Objects.equals(sortBy, "priceA")) {
+            return productsRepository.findAll(Sort.by("price"));
+        } else if (Objects.equals(sortBy, "priceD")) {
+            return productsRepository.findAll(Sort.by(Sort.Direction.DESC, "price"));
+        } else {
+            return productsRepository.findAll(Sort.by("id"));
+        }
+    }
+
+    /*public List<Product> findAllWithSortByPrice(boolean sortByPrice) {
         if (sortByPrice) {
             return productsRepository.findAll(Sort.by("price"));
         } else {
@@ -36,7 +47,7 @@ public class ProductsService {
 
     public List<Product> findAllWithSortById() {
         return productsRepository.findAll(Sort.by("id"));
-    }
+    }*/
 
     public Product findOne(int id) {
         Optional<Product> foundProduct = productsRepository.findById(id);
