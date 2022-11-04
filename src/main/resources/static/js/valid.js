@@ -20,7 +20,7 @@ $(document).ready(function(){
                 required: true,
                 email: true
             },
-            nameTesla: {
+            nameCar: {
                 required: true,
                 minlength: 2,
                 maxlength: 30
@@ -46,7 +46,7 @@ $(document).ready(function(){
               required: "Пожалуйста, введите свой адрес электронной почты",
               email: "Введённая почта должна быть формата name@domain.com"
             },
-            nameTesla: {
+            nameCar: {
                 required: "Пожалуйста, введите название модели",
                 minlength: jQuery.validator.format("Не менее {0} символов!"),
                 maxlength: jQuery.validator.format("Не более {0} символов!")
@@ -62,7 +62,7 @@ $(document).ready(function(){
         this.value = this.value.replace(/^[.:;№"!#$%&@'*+/=?^_`(){|}~-]/g, '');
     });
 
-    document.querySelector('#model').addEventListener('keyup', function(){
+    document.querySelector('#modelCar').addEventListener('keyup', function(){
         this.value = this.value.replace(/^[.:;№"!#$%&@'*+/=?^_`(){|}~-]/g, '');
     });
 });
