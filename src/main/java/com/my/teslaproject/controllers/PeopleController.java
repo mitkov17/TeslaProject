@@ -52,10 +52,9 @@ public class PeopleController {
     public String userPanel(Principal principal, Model model){
         Optional<Person> user = peopleService.getPersonByUsername(principal.getName());
 
-
-        if (user != null) {
+        if (user.isPresent()) {
             model.addAttribute("user", user);
-        }else {
+        } else {
             return "error/404";
         }
 

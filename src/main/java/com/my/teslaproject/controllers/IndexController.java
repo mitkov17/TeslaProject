@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/index")
 public class IndexController {
 
+    private final MailService mailService;
+
     @Autowired
-    private MailService mailService;
+    public IndexController(MailService mailService) {
+        this.mailService = mailService;
+    }
 
     @GetMapping()
     public String getInd(ModelMap modelMap) {

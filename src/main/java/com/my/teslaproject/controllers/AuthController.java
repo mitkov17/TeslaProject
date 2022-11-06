@@ -4,6 +4,7 @@ package com.my.teslaproject.controllers;
 import com.my.teslaproject.models.Person;
 import com.my.teslaproject.services.RegistrationService;
 import com.my.teslaproject.util.PersonValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class AuthController {
     private final PersonValidator personValidator;
     private final RegistrationService registrationService;
 
+    @Autowired
     public AuthController(PersonValidator personValidator, RegistrationService registrationService) {
         this.personValidator = personValidator;
         this.registrationService = registrationService;

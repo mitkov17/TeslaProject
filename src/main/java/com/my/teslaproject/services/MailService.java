@@ -11,8 +11,12 @@ import java.util.Date;
 @Service
 public class MailService {
 
+    private final JavaMailSender javaMailSender;
+
     @Autowired
-    private JavaMailSender javaMailSender;
+    public MailService(JavaMailSender javaMailSender) {
+        this.javaMailSender = javaMailSender;
+    }
 
     public void send (String fromAddress, String toAddress, String subject, String content) throws Exception {
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();

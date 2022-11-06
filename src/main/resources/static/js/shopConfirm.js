@@ -4,7 +4,7 @@ document.body.addEventListener('click', e => {
         // alerty.confirm(content, opts, onOk, onCancel)
         alerty.confirm(
             'Вы уверены, что хотите заказать этот электромобиль?',
-            {title: 'Подтверждение заказа', cancelLabel: 'Отменить', okLabel: 'Купить'},
+            {title: 'Подтверждение заказа', cancelLabel: 'Отменить', okLabel: 'Заказать'},
             function(){
                 alerty.toasts('Заказ подтверждён', {place: 'top'})
             },

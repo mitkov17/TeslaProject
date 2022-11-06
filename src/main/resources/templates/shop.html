@@ -76,6 +76,7 @@
         </aside>
         <main class="col-xs-12 col-sm-8 col-md-9 col-lg-10 shopMain">
             <div id="productList">
+                <!--<form th:action="@{/shop/order}" th:method="POST" th:object="${productOrder}" th:field="*{id}">-->
                 <div class="row">
                     <div th:each="product : ${products}" th:id="${product.getId()}" class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
                         <div class="panel panel-default product">
@@ -92,12 +93,15 @@
                                     <li class="list-group-item"><small>Цена: </small> <span th:text="'$' + ${product.getPrice()}" class="pricePark">product</span></li>
                                 </ul>
                                 <div class="code">
-                                    <input type="submit"  class="btn btn-success float-right confBtn" value="Купить">
+                                    <form th:action="@{/shop/order}" th:method="POST" th:object="${productOrder}" th:field="*{id}">
+                                        <input type="submit" class="btn btn-success float-right confBtn" value="Заказать">
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--</form>-->
             </div>
         </main>
     </div>

@@ -28,6 +28,9 @@ public class Order {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
+    @Transient
+    private boolean delivered;
+
     public Order() {
 
     }
