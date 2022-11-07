@@ -46,11 +46,48 @@ public class ShopController {
         return "shop";
     }
 
+    /*@GetMapping()
+    public String getPrId(Model model, @RequestParam(value = "prId", required = false) Integer id) {
+
+        if (id == null) {
+            return null;
+        } else {
+            Product product = productsService.findOne(id);
+
+        }
+
+        return "redirect:/shop";
+    }*/
+
     @PostMapping ("/search")
     public String searchCar(Model model, @RequestParam(value = "query") String query) {
         model.addAttribute("products", productsService.findByProductName(query));
         return "shop";
     }
+
+    @GetMapping("/makeOrder/{id}")
+    public String show(Model model, @PathVariable("id") int id) {
+
+        model.addAttribute("product", productsService.findOne(id));
+
+        return "order";
+    }
+
+    @Transactional
+    @PostMapping("/makeOrder/{id}")
+    public String addProduct(@ModelAttribute("order") Order order,
+                             //@ModelAttribute("productToOrder") Product product,
+                             @PathVariable("id") int id) {
+        PersonDetails personDetails = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Person person = personDetails.getPerson();
+
+        Product product = productsService.findOne(id);
+
+        ordersService.save(order, person, product);
+
+        return "redirect:/shop";
+    }
+
 
     /*@PostMapping("/order")
     public String makeOrder(@ModelAttribute("order") @Valid Order order,
@@ -68,17 +105,7 @@ public class ShopController {
         return "redirect:/shop";
     }*/
 
-    @Transactional
-    @PostMapping("/order")
-    public String addProduct(@ModelAttribute("order") Order order,
-                             @ModelAttribute("productToOrder") Product product) {
-        PersonDetails personDetails = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Person person = personDetails.getPerson();
 
-        ordersService.save(order, person, product);
-
-        return "redirect:/shop";
-    }
 
     /*@PostMapping("/order")
     public String makeOrder(@ModelAttribute("order") @Valid Order order,

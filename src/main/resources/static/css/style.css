@@ -735,6 +735,7 @@ a.alertm_close {
 }
 
 #shoppingCart table img {
+
 	max-height: 80px;
 	margin:0 auto;
 	display: block;
@@ -745,6 +746,7 @@ a.alertm_close {
 }
 
 #shoppingCart {
+  padding-top: 50px;
   margin-bottom: 180px;
 }
 
@@ -791,4 +793,9 @@ a.alertm_close {
 
 .shopMain {
   padding-bottom: 85px;
+}
+
+.orderButton {
+  margin: 0 auto;
+  display: block;
 }
