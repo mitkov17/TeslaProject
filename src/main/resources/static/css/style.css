@@ -809,3 +809,7 @@ a.alertm_close {
   margin: 50px auto auto auto;
   display: block;
 }
+
+.starter-template {
+  margin: 100px;
+}

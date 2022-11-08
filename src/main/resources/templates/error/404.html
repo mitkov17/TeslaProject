@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<header  id="target_up">
+    <nav>
+        <div class="container">
+            <ul class="menuPark">
+                <li class="menuPark_item"><a href="/index" class="menu_link">Главная</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+<div class="container">
+    <div class="starter-template">
+        <h1>Ошибка 404 или Not Found («не найдено»)</h1>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

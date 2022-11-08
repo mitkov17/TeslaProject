@@ -71,8 +71,8 @@ public class AdminController {
         return "redirect:/admin/adminPage";
     }
 
-    @GetMapping("/{id}/editUser")
-    public String edit(Model model, @PathVariable("id") int id) {
+    @GetMapping("/editProduct/{id}")
+    public String editProduct(Model model, @PathVariable("id") int id) {
         model.addAttribute("product", productsService.findOne(id));
 
         return "admin/editProduct";

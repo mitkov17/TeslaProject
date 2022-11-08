@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit user</title>
+    <title>Login page</title>
     <link rel="shortcut icon" href="icons/faviconEco.jpg" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
@@ -16,25 +16,24 @@
 </head>
 <body>
 
-<form th:method="PATCH" th:action="@{/admin/products/{id}(id=${product.getId()})}" th:object="${product}">
-    <input type="text" th:field="*{brand}" id="brand"/>
-    <label for="brand">Введите brand: </label>
-    <br/>
-    <input type="text" th:field="*{productName}" id="productName"/>
-    <label for="productName">Введите productName: </label>
-    <br/>
-    <input type="text" th:field="*{yearOfRelease}" id="yearOfRelease" />
-    <label for="yearOfRelease">yearOfRelease</label>
-    <br/>
-    <input type="text" th:field="*{price}" id="price" />
-    <label for="price">price</label>
-    <br/>
-    <input type="text" th:field="*{pathToImg}" id="pathToImg" />
-    <label for="pathToImg">pathToImg</label>
-    <br/>
+<header  id="target_up">
+    <nav>
+        <div class="container">
+            <ul class="menuPark">
+                <li class="menuPark_item"><a href="/index" class="menu_link">Главная</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-    <input type="submit" value="Редактировать!"/>
-</form>
+
+<div class="container">
+    <div class="starter-template">
+        <h1>500 Internal Server Error - HTTP</h1>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

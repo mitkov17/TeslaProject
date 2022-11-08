@@ -23,7 +23,6 @@ public class Product {
     private String productName;
 
     @Column(name = "year_of_release")
-    @Size(min = 2000, message = "year of release should be more then 2000")
     private int yearOfRelease;
 
     @Column(name = "price")
@@ -32,7 +31,7 @@ public class Product {
     @Column(name = "path_to_img")
     private String pathToImg;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Order> orders;
 
     public Product() {
