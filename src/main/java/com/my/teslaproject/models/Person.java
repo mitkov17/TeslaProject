@@ -48,7 +48,7 @@ public class Person {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date dateOfBirth;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
     private List<Order> orders;
 
     public Person() {

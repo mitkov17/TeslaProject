@@ -31,7 +31,7 @@ public class Product {
     @Column(name = "path_to_img")
     private String pathToImg;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Order> orders;
 
     public Product() {
