@@ -45,13 +45,6 @@ public class AdminController {
         return "admin/showUser";
     }
 
-    /*@GetMapping("/{id}/editUser")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", peopleService.findOne(id));
-
-        return "admin/editUser";
-    }*/
-
     //////////Products////////////
 
     @GetMapping("/newProduct")
