@@ -21,16 +21,6 @@
         <div class="container">
             <ul class="menuPark">
                 <li class="menuPark_item"><a href="/index" class="menu_link">Главная</a></li>
-            </ul>
-        </div>
-    </nav>
-</header>
-
-<header  id="target_up">
-    <nav>
-        <div class="container">
-            <ul class="menuPark">
-                <li class="menuPark_item"><a href="/index" class="menu_link">Главная</a></li>
                 <li class="menu_item" sec:authorize="isAuthenticated()">
                     <a class="menu_link" sec:authorize="hasRole('ROLE_ADMIN')" sec:authentication="name" th:href="@{/admin/adminPage}"></a>
                     <a class="menu_link" sec:authorize="hasRole('ROLE_USER')" sec:authentication="name" th:href="@{/people/personPage}"></a>
@@ -68,7 +58,7 @@
                         <label for="pathToImg">Путь до картинки</label>
                         <input class="form-control" type="text" th:field="*{pathToImg}" id="pathToImg" />
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Редактировать"/>
+                    <input class="btn btn-primary" type="submit" value="Добавить"/>
                 </form>
             </div>
         </div>
