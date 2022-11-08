@@ -1,6 +1,7 @@
 package com.my.teslaproject.controllers;
 
 import com.my.teslaproject.models.Person;
+import com.my.teslaproject.services.OrdersService;
 import com.my.teslaproject.services.PeopleService;
 import com.my.teslaproject.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,28 +20,14 @@ public class PeopleController {
 
     private final PeopleService peopleService;
     private final PersonValidator personValidator;
+    private final OrdersService ordersService;
 
     @Autowired
-    public PeopleController(PeopleService peopleService, PersonValidator personValidator) {
+    public PeopleController(PeopleService peopleService, PersonValidator personValidator, OrdersService ordersService) {
         this.peopleService = peopleService;
         this.personValidator = personValidator;
+        this.ordersService = ordersService;
     }
-
-    /*@GetMapping("/{id}")
-    public String personPage(Model model) {
-        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username = person.getUsername();
-        model.addAttribute("username", username);
-        return "people/personPage";
-    }*/
-
-    /*@GetMapping("/personPage")
-    public String personPage(Model model) {
-        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        int idPerson = person.getId();
-        model.addAttribute("person", peopleService.findOne(idPerson));
-        return "people/personPage";
-    }*/
 
     @GetMapping()
     @ResponseBody
@@ -52,6 +39,8 @@ public class PeopleController {
     public String userPanel(Principal principal, Model model){
         Optional<Person> user = peopleService.getPersonByUsername(principal.getName());
 
+        model.addAttribute("orders", ordersService.findByCustomer(user));
+
         if (user.isPresent()) {
             model.addAttribute("user", user);
         } else {
@@ -59,47 +48,5 @@ public class PeopleController {
         }
 
         return "people/personPage";
-    }
-
-    @GetMapping("/new")
-    public String newPerson(@ModelAttribute("person") Person person) {
-        return "people/new";
-    }
-
-    @PostMapping()
-    public String create(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
-        personValidator.validate(person, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "people/new";
-        }
-
-        peopleService.save(person);
-        return "redirect:/people";
-    }
-
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", peopleService.findOne(id));
-
-        return "people/edit";
-    }
-
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") @Valid Person person, @PathVariable("id") int id, BindingResult bindingResult) {
-        personValidator.validate(person, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "people/edit";
-        }
-
-        peopleService.update(id, person);
-        return "redirect:/people";
-    }
-
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") int id) {
-        peopleService.delete(id);
-        return "redirect:/people";
     }
 }

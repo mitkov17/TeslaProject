@@ -799,3 +799,13 @@ a.alertm_close {
   margin: 0 auto;
   display: block;
 }
+
+.pageSection {
+  padding: 71px 0 65px 0;
+  background : rgba(182, 189, 189, 0.12)
+}
+
+.logoutBtn {
+  margin: 50px auto auto auto;
+  display: block;
+}

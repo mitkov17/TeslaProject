@@ -22,8 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //конфигурируем сам Spring Security
-        //конфигурируем авторизацию
+
         http.authorizeRequests()
                 .antMatchers("/audio/**", "/css/**", "/first_screen/**", "/font-awesome-4.7.0/**",
                         "/fonts/**", "/gal_img/**", "/game_img/**", "/icons/**", "/img/**", "/js/**", "/musk/**",
@@ -41,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    //настраиваем аутентификацию
+
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(personDetailsService)
                 .passwordEncoder(getPasswordEncoder());

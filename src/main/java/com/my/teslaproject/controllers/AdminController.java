@@ -2,6 +2,7 @@ package com.my.teslaproject.controllers;
 
 import com.my.teslaproject.models.Person;
 import com.my.teslaproject.models.Product;
+import com.my.teslaproject.services.OrdersService;
 import com.my.teslaproject.services.PeopleService;
 import com.my.teslaproject.services.ProductsService;
 import com.my.teslaproject.services.RegistrationService;
@@ -19,22 +20,21 @@ import javax.validation.Valid;
 public class AdminController {
 
     private final PeopleService peopleService;
-    private final PersonValidator personValidator;
-    private final RegistrationService registrationService;
     private final ProductsService productsService;
+    private final OrdersService ordersService;
 
     @Autowired
-    public AdminController(PeopleService peopleService, PersonValidator personValidator, RegistrationService registrationService, ProductsService productsService) {
+    public AdminController(PeopleService peopleService, ProductsService productsService, OrdersService ordersService) {
         this.peopleService = peopleService;
-        this.personValidator = personValidator;
-        this.registrationService = registrationService;
         this.productsService = productsService;
+        this.ordersService = ordersService;
     }
 
     @GetMapping("/adminPage")
     public String adminIndex(Model model, @ModelAttribute("person") Person person) {
         model.addAttribute("people", peopleService.findAll());
         model.addAttribute("products", productsService.findAll());
+        model.addAttribute("orders", ordersService.findAll());
         return "admin/adminPage";
     }
 
@@ -45,58 +45,14 @@ public class AdminController {
         return "admin/showUser";
     }
 
-    @GetMapping("/newUser")
-    public String adminRegistration(@ModelAttribute("person") Person person) {
-        return "admin/newUser";
-    }
-
-    @PostMapping("/newUser")
-    public String adminRegistration(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
-        personValidator.validate(person, bindingResult);
-
-        if(bindingResult.hasErrors()) {
-            return "/admin/newUser";
-        }
-
-        registrationService.register(person);
-
-        return "redirect:/admin/adminPage";
-    }
-
-    @GetMapping("/{id}/editUser")
+    /*@GetMapping("/{id}/editUser")
     public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("person", peopleService.findOne(id));
 
         return "admin/editUser";
-    }
-
-    @PatchMapping("/users/{id}")
-    public String update(@ModelAttribute("person") @Valid Person person, @PathVariable("id") int id, BindingResult bindingResult) {
-        personValidator.validate(person, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "/admin/editUser";
-        }
-
-        peopleService.update(id, person);
-        return "redirect:/admin/adminPage";
-    }
-
-    /*@DeleteMapping("/users/{id}")
-    public String delete(@PathVariable("id") int id) {
-        peopleService.delete(id);
-        return "redirect:/admin/adminPage";
     }*/
 
-
     //////////Products////////////
-
-    @GetMapping("/products/{id}")
-    public String showProduct(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", productsService.findOne(id));
-
-        return "admin/showProduct";
-    }
 
     @GetMapping("/newProduct")
     public String addProduct(@ModelAttribute("product") Product product) {
@@ -104,7 +60,6 @@ public class AdminController {
     }
 
     @PostMapping("/newProduct")
-    //@PostMapping()
     public String addProduct(@ModelAttribute("product") @Valid Product product, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
@@ -116,8 +71,8 @@ public class AdminController {
         return "redirect:/admin/adminPage";
     }
 
-    @GetMapping("/{id}/editProduct")
-    public String editProduct(Model model, @PathVariable("id") int id) {
+    @GetMapping("/{id}/editUser")
+    public String edit(Model model, @PathVariable("id") int id) {
         model.addAttribute("product", productsService.findOne(id));
 
         return "admin/editProduct";
@@ -139,4 +94,5 @@ public class AdminController {
         productsService.delete(id);
         return "redirect:/admin/adminPage";
     }
+
 }

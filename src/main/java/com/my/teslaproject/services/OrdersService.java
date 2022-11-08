@@ -29,15 +29,14 @@ public class OrdersService {
         return ordersRepository.findAll();
     }
 
+    public List<Order> findByCustomer(Optional<Person> person) {
+        return ordersRepository.findByCustomer(person);
+    }
+
     public Order findOne(int id) {
         Optional<Order> foundOrder = ordersRepository.findById(id);
         return foundOrder.orElse(null);
     }
-
-    /*@Transactional
-    public void save(Order order) {
-        ordersRepository.save(order);
-    }*/
 
     @Transactional
     public void save(Order order, Person person, Product product) {
@@ -57,4 +56,5 @@ public class OrdersService {
     public void delete(int id) {
         ordersRepository.deleteById(id);
     }
+
 }

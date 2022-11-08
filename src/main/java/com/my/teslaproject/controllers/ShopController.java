@@ -7,17 +7,11 @@ import com.my.teslaproject.security.PersonDetails;
 import com.my.teslaproject.services.OrdersService;
 import com.my.teslaproject.services.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/shop")
@@ -34,8 +28,7 @@ public class ShopController {
 
     @GetMapping()
     public String shopPage(Model model, @RequestParam(value = "sort_by", required = false) String sortBy,
-                           @RequestParam(value = "find_by_brand", required = false) String brand,
-                           @RequestParam(value = "find_by_product_name", required = false) String productName) {
+                           @RequestParam(value = "find_by_brand", required = false) String brand) {
 
         if (brand != null) model.addAttribute("products", productsService.findAllByBrand(brand));
 
@@ -43,26 +36,13 @@ public class ShopController {
 
         model.addAttribute("productOrder", new Product());
 
-        return "shop";
+        return "shop/shop";
     }
-
-    /*@GetMapping()
-    public String getPrId(Model model, @RequestParam(value = "prId", required = false) Integer id) {
-
-        if (id == null) {
-            return null;
-        } else {
-            Product product = productsService.findOne(id);
-
-        }
-
-        return "redirect:/shop";
-    }*/
 
     @PostMapping ("/search")
     public String searchCar(Model model, @RequestParam(value = "query") String query) {
         model.addAttribute("products", productsService.findByProductName(query));
-        return "shop";
+        return "shop/shop";
     }
 
     @GetMapping("/makeOrder/{id}")
@@ -70,14 +50,12 @@ public class ShopController {
 
         model.addAttribute("product", productsService.findOne(id));
 
-        return "order";
+        return "shop/shoppingCart";
     }
 
     @Transactional
     @PostMapping("/makeOrder/{id}")
-    public String addProduct(@ModelAttribute("order") Order order,
-                             //@ModelAttribute("productToOrder") Product product,
-                             @PathVariable("id") int id) {
+    public String addProduct(@ModelAttribute("order") Order order, @PathVariable("id") int id) {
         PersonDetails personDetails = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Person person = personDetails.getPerson();
 
@@ -87,37 +65,4 @@ public class ShopController {
 
         return "redirect:/shop";
     }
-
-
-    /*@PostMapping("/order")
-    public String makeOrder(@ModelAttribute("order") @Valid Order order,
-                            @ModelAttribute("product") @Valid Product product,
-                            BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return "shop";
-
-        //Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        Authentication authentication = authenticationFacade.getAuthentication();
-        Person person = (Person) authentication;
-
-        ordersService.save(order, product, person);
-
-        return "redirect:/shop";
-    }*/
-
-
-
-    /*@PostMapping("/order")
-    public String makeOrder(@ModelAttribute("order") @Valid Order order,
-                            @ModelAttribute("product") @Valid Product product,
-                            BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return "shop";
-
-        Person person = (Person) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        ordersService.save(order, product, person);
-
-        return "redirect:/shop";
-    }*/
-
 }

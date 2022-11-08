@@ -12,6 +12,7 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}">
+
 </head>
 <body>
 
@@ -25,7 +26,7 @@
     </nav>
 </header>
 
-<section id="spec" class="specific">
+<section id="spec" class="pageSection">
     <div class="container">
         <div class="label">users</div>
         <div class="title2">таблица с пользователями</div>
@@ -42,31 +43,24 @@
                     <br/>
                     <table>
                         <tr>
-                            <td>Полное имя</td>
-                            <td>Телефон</td>
-                            <td>Эл.адрес</td>
-                            <td>Дата рождения</td>
-                            <td>Удалить</td>
+                            <th>Полное имя</th>
+                            <th>Никнейм</th>
+                            <th>Телефон</th>
+                            <th>Эл.адрес</th>
+                            <th>Дата рождения</th>
+                            <th>Роль</th>
                         </tr>
                         <tr th:each="person : ${people}">
-                            <td><a th:href="@{/admin/users/{id}(id=${person.getId()})}" th:text="${person.getFullName()}">person</a></td>
+                            <td><span th:text="${person.getFullName()}">person</span></td>
+                            <td><span th:text="${person.getUsername()}">person</span></td>
                             <td><span th:text="${person.getPhone()}">person</span></td>
                             <td><span th:text="${person.getEmail()}">person</span></td>
                             <td><span th:text="${person.getDateOfBirth()}">person</span></td>
-                            <td><form th:method="DELETE" th:action="@{/admin/users/{id}(id=${person.getId()})}">
-                                <input type="submit" value="Удалить"/>
-                            </form></td>
+                            <td><span th:text="${person.getRole()}">person</span></td>
                         </tr>
                     </table>
                     <hr/>
                 </div>
-
-                <!--<span th:text="${person.getFullName() + ', ' + person.getPhone() + ', ' + person.getEmail() +
-                                ', ' + person.getDateOfBirth() + ', ' + person.getUsername() + ', ' + person.getPassword()
-                                + ', ' + person.getRole()}">
-                                    person
-                                </span>-->
-
             </div>
         </div>
     </div>
@@ -89,12 +83,12 @@
                     <br/>
                     <table>
                         <tr>
-                            <td>Бренд</td>
-                            <td>Модель</td>
-                            <td>Год выпуска</td>
-                            <td>Цена</td>
-                            <td></td>
-                            <td></td>
+                            <th>Бренд</th>
+                            <th>Модель</th>
+                            <th>Год выпуска</th>
+                            <th>Цена</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         <tr th:each="product : ${products}">
                             <td><span th:text="${product.getBrand()}">product</span></td>
@@ -102,10 +96,10 @@
                             <td><span th:text="${product.getYearOfRelease()}">product</span></td>
                             <td><span th:text="${product.getPrice()}">product</span></td>
                             <td><form th:method="GET" th:action="@{/admin/{id}/editProduct(id=${product.getId()})}">
-                                <input type="submit" value="Редактировать"/>
+                                <input class="btn btn-warning" type="submit" value="Редактировать"/>
                             </form></td>
                             <td><form th:method="DELETE" th:action="@{/admin/products/{id}(id=${product.getId()})}">
-                                <input type="submit" value="Удалить"/>
+                                <input class="btn btn-danger" type="submit" value="Удалить"/>
                             </form></td>
                         </tr>
                     </table>
@@ -118,11 +112,68 @@
 </section>
 
 
-<br><br>
 
-<form th:action="@{/logout}" th:method="POST">
-    <input type="submit" value="logout"/>
-</form>
+<section id="spec2" class="pageSection">
+    <div class="container">
+        <div class="label">orders</div>
+        <div class="title2">таблица с заказами</div>
+        <div class="row" >
+            <div class="col-md-12" >
+
+                <div th:if="${orders.isEmpty()}">
+                    <p>В системе пока не зарегистрирован ни один заказ</p>
+                    <hr/>
+                </div>
+
+                <div th:if="${!orders.isEmpty()}">
+                    <hr/>
+                    <br/>
+                    <table>
+                        <tr>
+                            <th>ID заказа</th>
+                            <th>Дата заказа</th>
+                            <th>Никнейм заказчика</th>
+                            <th>Электромобиль</th>
+                            <th></th>
+                        </tr>
+                        <tr th:each="order : ${orders}">
+                            <td><span th:text="${order.getId()}">order</span></td>
+                            <td><span th:text="${order.getCreatedAt()}">order</span></td>
+                            <td><span th:text="${order.getCustomer().getUsername()}">order</span></td>
+                            <td><span th:text="${order.getProduct().getBrand() + ' ' + order.getProduct().getProductName()}">order</span></td>
+                            <td><form th:method="DELETE" th:action="@{/admin/orders/{id}(id=${order.getId()})}">
+                                <input class="btn btn-danger confBtn" type="submit" value="Удалить"/>
+                            </form></td>
+                        </tr>
+                    </table>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form th:action="@{/logout}" th:method="POST">
+        <input class="btn btn-danger logoutBtn" type="submit" value="Выйти из аккаунта"/>
+    </form>
+</section>
+
+<footer id="foot" class="footer">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3662.2278149570006!2d-122.15273856833483!3d37.394748336392475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb0755d7d5b47%3A0xaa5d96e0a3eec104!2zMzUwMCBEZWVyIENyZWVrIFJkLCBQYWxvIEFsdG8sIENBIDk0MzA0LCDQodCo0JA!5e0!3m2!1sru!2sua!4v1603732151556!5m2!1sru!2sua" width="100%" height="630" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+    <div class="footer_info">
+        <address class="footer_addr">3500 Deer Creek Road
+            Пало-Альто , Калифорния 94304</address>
+        <a class="footer_phone" href="tel:08921093303">08921 093303</a>
+        <div class="footer_social">
+            <a href="https://www.facebook.com/TESLAOFFICIAL/" class="footer_social-item"><img th:src="@{/icons/faceb_ic.svg}" alt="facebook"></a>
+            <a href="https://www.instagram.com/teslamotors/" class="footer_social-item"><img th:src="@{/icons/insta_ic.svg}" alt="instagram"></a>
+            <a href="https://twitter.com/tesla" class="footer_social-item"><img th:src="@{/icons/twitter_ic.svg}" alt="twitter"></a>
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
