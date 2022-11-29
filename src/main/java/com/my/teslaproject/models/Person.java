@@ -27,7 +27,7 @@ public class Person {
     private String fullName;
 
     @Column(name = "username")
-    @NotEmpty(message = "username should not be empty")
+    @NotEmpty(message = "Username should not be empty")
     private String username;
 
     @Column(name = "password")
@@ -37,7 +37,7 @@ public class Person {
     private String role;
 
     @Column(name = "phone")
-    private int phone;
+    private long phone;
 
     @Column(name = "email")
     @Email

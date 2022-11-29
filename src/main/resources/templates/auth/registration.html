@@ -60,7 +60,7 @@
                                 <div class="col-md-6 mb-4">
 
                                     <div class="form-outline">
-                                        <input type="tel" th:field="*{phone}" id="phone" class="form-control form-control-lg" />
+                                        <input type="text" th:field="*{phone}" id="phone" class="form-control form-control-lg" />
                                         <label class="form-label" for="phone">Телефон</label>
                                         <div style="color:red" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phone error</div>
                                     </div>
