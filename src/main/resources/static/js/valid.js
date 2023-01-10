@@ -28,28 +28,28 @@ $(document).ready(function(){
         },
         messages: {
             name: {
-                required: "Пожалуйста, введите своё имя",
-                minlength: jQuery.validator.format("Не менее {0} символов!"),
-                maxlength: jQuery.validator.format("Не более {0} символов!")
+                required: "Please, enter your name",
+                minlength: jQuery.validator.format("No less than {0} symbols!"),
+                maxlength: jQuery.validator.format("No less than {0} symbols!")
             },
             surname: {
-                required: "Пожалуйста, введите свою фамилию",
-                minlength: jQuery.validator.format("Не менее {0} символов!"),
-                maxlength: jQuery.validator.format("Не более {0} символов!")
+                required: "Please, enter your surname",
+                minlength: jQuery.validator.format("No less than {0} symbols!"),
+                maxlength: jQuery.validator.format("No less than {0} symbols!")
             },
             phone: {
-                required : "Пожалуйста, введите свой номер телефона",
-                minlength: jQuery.validator.format("Не менее {0} символов!"),
-                maxlength: jQuery.validator.format("Не более {0} символов!")
+                required : "Please, enter your phone number",
+                minlength: jQuery.validator.format("No less than {0} symbols!"),
+                maxlength: jQuery.validator.format("No less than {0} symbols!")
             },
             email: {
-              required: "Пожалуйста, введите свой адрес электронной почты",
-              email: "Введённая почта должна быть формата name@domain.com"
+              required: "Please, enter your email",
+              email: "The email entered must be in the format name@domain.com"
             },
             nameCar: {
-                required: "Пожалуйста, введите название модели",
-                minlength: jQuery.validator.format("Не менее {0} символов!"),
-                maxlength: jQuery.validator.format("Не более {0} символов!")
+                required: "Please, enter model's name",
+                minlength: jQuery.validator.format("No less than {0} symbols!"),
+                maxlength: jQuery.validator.format("No less than {0} symbols!")
             },
         }
     });

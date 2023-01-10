@@ -24,17 +24,27 @@
         <nav>
             <div class="container">
                     <ul class="menu">
-                        <li class="menu_item"><a href="#target_up" class="menu_link">Главная</a></li>
-                        <li class="menu_item"><a href="#about" class="menu_link">О нас</a></li>
-                        <li class="menu_item"><a href="#models" class="menu_link">Модельный ряд</a></li>
-                        <li class="menu_item"><a href="#spec" class="menu_link">Характеристики</a></li>
-                        <li class="menu_item"><a href="#gallery" class="menu_link">Галерея</a></li>
-                        <li class="menu_item"><a href="#foot" class="menu_link">Контакты</a></li>
-                        <li class="menu_item"><a href="/shop" class="menu_link">Магазин</a></li>
-                        <li class="menu_item" sec:authorize="!isAuthenticated()"><a href="/auth/login" class="menu_link">Авторизация</a></li>
+                        <li class="menu_item"><a href="#target_up" class="menu_link" th:text="#{nav.main}">Главная</a></li>
+                        <li class="menu_item"><a href="#about" class="menu_link" th:text="#{nav.aboutUs}">О нас</a></li>
+                        <li class="menu_item"><a href="#models" class="menu_link" th:text="#{nav.models}">Модельный ряд</a></li>
+                        <li class="menu_item"><a href="#spec" class="menu_link" th:text="#{nav.characteristics}">Характеристики</a></li>
+                        <li class="menu_item"><a href="#gallery" class="menu_link" th:text="#{nav.gallery}">Галерея</a></li>
+                        <li class="menu_item"><a href="#foot" class="menu_link" th:text="#{nav.contacts}">Контакты</a></li>
+                        <li class="menu_item"><a href="/shop" class="menu_link" th:text="#{nav.shop}">Магазин</a></li>
+                        <li class="menu_item" sec:authorize="!isAuthenticated()"><a href="/auth/login" class="menu_link" th:text="#{nav.authorisation}">Авторизация</a></li>
                         <li class="menu_item" sec:authorize="isAuthenticated()">
                             <a class="menu_link" sec:authorize="hasRole('ROLE_ADMIN')" sec:authentication="name" th:href="@{/admin/adminPage}"></a>
                             <a class="menu_link" sec:authorize="hasRole('ROLE_USER')" sec:authentication="name" th:href="@{/people/personPage}"></a>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <div class="dropbtn" th:text="#{nav.language}">Язык</div>
+                                <div class="dropdown-content">
+                                    <a th:href="@{'?lang=ua'}">UA</a>
+                                    <a th:href="@{'?lang=en'}">EN</a>
+                                    <a th:href="@{'?lang=ru'}">RU</a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
             </div>
@@ -45,22 +55,22 @@
                 <div class="row">
                     <div class="col-md-4 offset-md-1">
                         <a href="https://github.com/mitkov17/TeslaProject" class="subheader_logo">mitkov17.github.io</a>
-                        <div class="subheader_official">Официальный партнер Tesla</div>
+                        <div class="subheader_official" th:text="#{header.partner}">Официальный партнер Tesla</div>
                     </div>
 
                     <div class="col-md-2 offset-md-2">
-                        <div class="subheader_call">Звоните нам ежедневно</div>
+                        <div class="subheader_call" th:text="#{header.callUs}">Звоните нам ежедневно</div>
                         <a href="tel:08921093303" class="subheader_phone">08921 093303</a>
                     </div>
 
                     <div class="col-md-2">
-                        <button class="subheader_btn" data-toggle="modal" data-target="#konsModal">заказать консультацию</button>
+                        <button class="subheader_btn" data-toggle="modal" data-target="#konsModal" th:text="#{header.consult}">заказать консультацию</button>
 
                         <div class="modal fade" id="konsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Заказать консультацию</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel" th:text="#{header.consult}">Заказать консультацию</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -72,39 +82,39 @@
                                   <form th:method="POST" th:action="@{/index/send}" id="consultation-form">
 
                                     <div class="form-group">
-                                        <label for="idName">Ваше имя</label>
-                                        <input name="name" id="idName" type="text" class="form-control" placeholder="Введите ваше имя">
+                                        <label for="idName" th:text="#{header.modal.name}">Ваше имя</label>
+                                        <input name="name" id="idName" type="text" class="form-control" th:placeholder="#{header.modal.placeholder.name}">
                                       </div>
                                       <div class="form-group">
-                                        <label for="idSurname">Ваша фамилия</label>
-                                        <input name="surname" id="idSurname" type="text" class="form-control" placeholder="Введите вашу фамилию">
-                                      </div>
-
-                                      <div class="form-group">
-                                        <label for="phone">Ваш телефон</label>
-                                        <input name="phone" type="number" class="form-control" id="phone" placeholder="Введите ваш номер телефона">
+                                        <label for="idSurname" th:text="#{header.modal.surname}">Ваша фамилия</label>
+                                        <input name="surname" id="idSurname" type="text" class="form-control" th:placeholder="#{header.modal.placeholder.surname}">
                                       </div>
 
                                       <div class="form-group">
-                                        <label for="email">Ваш email</label>
-                                        <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Введите адрес своей электронной почты">
-                                        <small id="emailHelp" class="form-text text-muted">Мы никогда никому не передадим ваши персональные данные.</small>
+                                        <label for="phone" th:text="#{header.modal.phone}">Ваш телефон</label>
+                                        <input name="phone" type="number" class="form-control" id="phone" th:placeholder="#{header.modal.placeholder.phone}">
                                       </div>
 
                                       <div class="form-group">
-                                        <label for="modelCar">Модель вашего электромобиля</label>
-                                        <input name="nameCar" id="modelCar" type="text" class="form-control" placeholder="Введите название модели">
+                                        <label for="email" th:text="#{header.modal.email}">Ваш email</label>
+                                        <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" th:placeholder="#{header.modal.placeholder.email}">
+                                        <small id="emailHelp" class="form-text text-muted" th:text="#{header.modal.emailPersonalData}">Мы никогда никому не передадим ваши персональные данные.</small>
+                                      </div>
+
+                                      <div class="form-group">
+                                        <label for="modelCar" th:text="#{header.modal.model}">Модель вашего электромобиля</label>
+                                        <input name="nameCar" id="modelCar" type="text" class="form-control" th:placeholder="#{header.modal.placeholder.model}">
                                       </div>
 
                                     <div class="form-group">
-                                        <label for="info">Опишите вашу проблему</label>
+                                        <label for="info" th:text="#{header.modal.problem}">Опишите вашу проблему</label>
                                         <textarea name="info" style="resize: none;" class="form-control" id="info" rows="5"></textarea>
                                       </div>
-                                      <input type="submit" class="btn btn-primary">
+                                      <input type="submit" class="btn btn-primary" th:value="#{button.send}">
                                   </form>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.close}">Закрыть</button>
                                   
                                 </div>
                               </div>
@@ -134,10 +144,10 @@
     <section id="about" class="about_us">
         <div class="container">
             <div class="about_label">about us</div>
-            <h2 class="title">Добро пожаловать</h2>
+            <h2 class="title" th:text="#{aboutus.welcome}">Добро пожаловать</h2>
             <div class="row">
                 <div class="col-md-12">
-                    <p class="about_text">Мы - команда разработчиков, состоящая из одного человека, сделали сайт об электромобилях Tesla и хотим представить его Вам.</p>
+                    <p class="about_text" th:text="#{aboutus.whoweare}">Who we are</p>
                     <div style="text-align: center;"><img src="musk/inside.jpg" width="100%"></div>
                 </div>
             </div>
@@ -147,7 +157,7 @@
     <section id="models" class="model">
         <div class="container">
             <div class="label">description</div>
-            <h2 class="title">Модельный ряд</h2>
+            <h2 class="title" th:text="#{lineup.title}">Модельный ряд</h2>
             <div class="row">
                 <div class="col-md-6">
                     <div class="model_block">
@@ -156,11 +166,9 @@
                         </div>
                         <div class="model_descr">
                             <div class="model_subtitle">Tesla Roadster</div>
-                            <div class="model_text">Спортивный электромобиль, первый автомобиль фирмы. Официальная презентация состоялась 19 июля 2006 года в городе Санта-Моника, Калифорния.
+                            <div class="model_text" th:text="#{lineup.roadster.brief}">Value</div>
 
-                                Tesla Motors провела конкурс для выбора вида запланированных двух Tesla Roadster, выданных британским производителем спортивных автомобилей Lotus. Автомобили были получены.</div>
-
-                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#roads_mod">Читать далее</button>
+                                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#roads_mod" th:text="#{button.readmore}">Читать далее</button>
 
                                 <!-- Modal -->
                             <div class="modal fade bd-example-modal-lg" id="roads_mod" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
@@ -176,33 +184,22 @@
                                     <video width="100%" height="400" controls="controls" poster="video/roadster_pre.jpg" src="video/roadster_speed.mp4" class="vid_cl"></video>
                                     <audio controls src="audio/roadster_speed.aud.mp3" class="aud_cl"></audio>
                                     <div class="modal_text">
-                                        Спортивный электромобиль, первый автомобиль фирмы. Официальная презентация состоялась 19 июля 2006 года в городе Санта-Моника, Калифорния.
-                                        <br><br>
-                                        Tesla Motors провела конкурс для выбора вида запланированных двух Tesla Roadster, выданных британским производителем спортивных автомобилей Lotus. Автомобили были получены.
-                                        <br><br>
-                                        Первые 1000 Tesla Roadster были сделаны в течение одного месяца. Цена одного автомобиля составила 100 000 долларов США. Серийное производство началось в марте 2008 года.
-                                        <br><br>
-                                        Эта модель продавалась до 2012 года, поскольку контракт с Lotus на поставку 2500 машин истёк в конце 2011 года. Компания перестала принимать заявки на американском рынке в августе 2011 года. Следующее поколение этой модели планируется представить в 2019 году.
-                                        <br><br>
-                                        Серийное производство, по заявлению компании, началось 17 марта 2008 года, хотя реальные поставки покупателям начались на несколько месяцев позже.
-                                        <br><br>
-                                        К сентябрю 2009 года было продано 700 родстеров
-                                        <br><br>
-                                        В 2010 году компания начала производство и продажу праворульных автомобилей для рынков Великобритании, Австралии, Японии, Гонконга и Сингапура. В этом же году была представлена версия Tesla Roadster 2,5.
-                                        <br><br>
-                                        В мае 2010 года компания Tesla Motors получила от Toyota 50 миллионов долларов инвестиций, на которые приобрела закрытый завод NUMMI (Фремонт, штат Калифорния), ранее принадлежавший Toyota.
-                                        <br><br>
-                                        Контракт с Lotus на поставку 2500 машин истёк в конце 2011 года. Компания перестала принимать заявки на американском рынке в августе 2011 года. Производство модели Tesla Roadster прекращено в январе 2012 года. В рестайлинговой версии Roadster 2.5, который был представлен летом 2012 в Гудвуде, автомобиль получил измененную радиаторную решетку, передний и задний бампера.
-                                        <br><br>
-                                        29 сентября 2014 Tesla Motors заявила о незначительном обновлении модели. Новую версию назвали Tesla Roadster 3.0. Улучшенная аэродинамика, увеличенная до 70 кВт·ч ёмкость аккумуляторов и шины с меньшим сопротивлением качению позволили увеличить автономность до 644 км (400 миль).
-                                        <br><br>
-                                        Новое поколение Roadster, построенное на той же платформе что и Model 3 планируется выпустить в 2019 году.
-                                        <br><br>
-                                        На международном Детройтском автосалоне 2010 был показан юбилейный экземпляр Tesla Roadster. Руководитель Tesla Илон Маск сообщил, что компания выпустила 1000 электрических родстеров Tesla Roadster. Тысячный Tesla Roadster отличается уникальной отделкой интерьера с карбоновыми вставками. Его цена составляет 175 тысяч долларов и вырученные от его продажи средства направят на благотворительные нужды.
+                                        <p th:text="#{lineup.roadster.more1}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more2}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more3}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more4}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more5}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more6}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more7}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more8}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more9}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more10}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more11}"></p> <br>
+                                        <p th:text="#{lineup.roadster.more12}"></p> <br>
                                     </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.close}">Закрыть</button>
                                     </div>
                                 </div>
                                 </div>
@@ -220,9 +217,9 @@
                         </div>
                         <div class="model_descr">
                             <div class="model_subtitle">Tesla Model S</div>
-                            <div class="model_text">Концепт автомобиля был представлен 26 марта 2009 года в городке Хоторн, Калифорния. Пятидверный хетчбэк разрабатывается под прежним условным обозначением «Whitestar» фирменным филиалом в Детройте. После окончания проектно-конструкторских работ фабрика должна производить в Калифорнии первоначально 10 000, позже — 25 000 автомобилей модели.</div>
+                            <div class="model_text" th:text="#{lineup.modelS.brief}">Концепт автомобиля был представлен 26 марта 2009 года в городке Хоторн, Калифорния. Пятидверный хетчбэк разрабатывается под прежним условным обозначением «Whitestar» фирменным филиалом в Детройте. После окончания проектно-конструкторских работ фабрика должна производить в Калифорнии первоначально 10 000, позже — 25 000 автомобилей модели.</div>
 
-                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modS_mod">Читать далее</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modS_mod" th:text="#{button.readmore}">Читать далее</button>
 
                                 <!-- Modal -->
                             <div class="modal fade bd-example-modal-lg" id="modS_mod" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel2" aria-hidden="true">
@@ -238,28 +235,19 @@
                                     <video width="100%" height="400" controls="controls" poster="video/model_S_pre.jpg" src="video/model_S_vid.mp4" class="vid_cl"></video>
                                     <audio controls src="audio/model_S_aud.mp3" class="aud_cl"></audio>
                                     <div class="modal_text">
-                                        Концепт автомобиля был представлен 26 марта 2009 года в городке Хоторн, Калифорния. Пятидверный хетчбэк разрабатывается под прежним условным обозначением «Whitestar» фирменным филиалом в Детройте. После окончания проектно-конструкторских работ фабрика должна производить в Калифорнии первоначально 10 000, позже — 25 000 автомобилей модели.
-                                        <br><br>
-                                        Поставка автомобилей в США началась 22 июня 2012 года. Изначально предлагалось две версии: на 60 и 85 кВт⋅ч, оборудованные одним электродвигателем, расположенным на задней оси. Затем, 9 октября 2014 года, появилась опция с электродвигателями на каждой оси, а уже с 8 апреля 2015 года компания полностью отказалась от однодвигательной комплектации и от 60 кВт⋅ч версии. С этого времени все выпускающиеся машины оборудованы двумя электродвигателями, полным приводом и в базовой версии оснащаются 70 кВт⋅ч батареей. Стартовая цена начинается от 75 750 долларов в США. В зависимости от комплектации, без перезарядки автомобиль сможет проехать 442, 502 и 480 километров.
-                                        <br><br>
-                                        12 ноября 2012 года автомобиль получил награду «Автомобиль года» от американского журнала Motor Trend.
-                                        <br><br>
-                                        Поставки моделей S и X в 2015 и 2016 годах:
-                                        <br><br>
-                                        30 марта 2018 года компания Tesla отозвала около 123 тыс. автомобилей серии Model S, которые были выпущены до апреля 2016, для замены деталей гидроусилителя руля. Обуславливалось это тем, что болты гидроусилителя подвержены коррозии в холодное время года. Такое воздействие оказывается из-за соли, которую используют в целях предотвращения обледенения на дорогах.
-                                        Tesla начала поставки с 1000 седанов ограниченного выпуска Signature и Signature Performance, оснащённых аккумуляторами ёмкостью 85 кВт·ч и стоимостью 95 400 и 105 400 долларов соответственно.
-                                        <br><br>
-                                        Изначально в планах Tesla было начать в 2013 году производство автомобилей с аккумуляторами ёмкостью 60 кВт·ч (335 км) и 40 кВт·ч (260 км), однако из-за малого спроса от модели на 40 кВт·ч решено было отказаться от них.
-                                        <br><br>
-                                        В июне 2013 года компания показала перезарядку Model S путём автоматической замены батареи. В ходе демонстрации было показано, что процедура занимает примерно 90 секунд, что более чем вдвое быстрее заправки полного бака аналогичного бензинового автомобиля. По заявлению президента компании Илона Маска, «медленная» (20 минут для 50 % заряда аккумулятора) зарядка батареи Model S на заправочных станциях компании останется бесплатной, в то время как быстрая замена обойдётся владельцу машины в сумму около 60—80 долларов, что примерно соответствует стоимости полного бака бензина.
-                                        <br><br>
-                                        Однако, в дальнейшем, от планов по автоматической смене батарей было решено отказаться в пользу развития сети заправок Tesla Superchargers. Только автомобили, проданные до 22 января 2017 года, будут пользоваться пожизненной бесплатной неограниченной быстрой зарядкой на станциях Tesla Superchargers; автомобили, проданные после января 2017 года, получат 400 кВт·ч бесплатной быстрой зарядки в год, при превышении этого количества, владельцу придётся оплатить стоимость потреблённого во время быстрой зарядки электричества.
-                                        <br><br>
-                                        В 2016 году Tesla Model S получил обновлённый дизайн, частично более схожий с Model 3. В 2017 году также произошло некоторое обновление модельного ряда и теперь в продаже доступны только версии 75, 75D, 100D, P100D (цифры обозначают ёмкость аккумулятора в кВт·ч, D — полный привод, P — производительная версия).
+                                        <p th:text="#{lineup.modelS.more1}"></p> <br>
+                                        <p th:text="#{lineup.modelS.more2}"></p> <br>
+                                        <p th:text="#{lineup.modelS.more3}"></p> <br>
+                                        <p th:text="#{lineup.modelS.more4}"></p> <br>
+                                        <p th:text="#{lineup.modelS.more5}"></p> <br>
+                                        <p th:text="#{lineup.modelS.more6}"></p> <br>
+                                        <p th:text="#{lineup.modelS.more7}"></p> <br>
+                                        <p th:text="#{lineup.modelS.more8}"></p> <br>
+                                        <p th:text="#{lineup.modelS.more9}"></p> <br>
                                     </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.close}">Закрыть</button>
                                     </div>
                                 </div>
                                 </div>
@@ -277,9 +265,9 @@
                         </div>
                         <div class="model_descr">
                             <div class="model_subtitle">Tesla Model X</div>
-                            <div class="model_text">9 февраля 2012 года компания представила прототип новой модели — кроссовер под названием Tesla Model X. Тогда же Илон Маск заявил, что производство модели планируется начать в 2013 году.</div>
+                            <div class="model_text" th:text="#{lineup.modelX.brief}">9 февраля 2012 года компания представила прототип новой модели — кроссовер под названием Tesla Model X. Тогда же Илон Маск заявил, что производство модели планируется начать в 2013 году.</div>
 
-                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modX_mod">Читать далее</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modX_mod" th:text="#{button.readmore}">Читать далее</button>
 
                                 <!-- Modal -->
                             <div class="modal fade bd-example-modal-lg" id="modX_mod" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel3" aria-hidden="true">
@@ -295,23 +283,17 @@
                                     <video width="100%" height="400" controls="controls" poster="video/model_X_pre.jpg" src="video/model_X_vid.mp4" class="vid_cl"></video>
                                     <audio controls src="audio/model_X_aud.mp3" class="aud_cl"></audio>
                                     <div class="modal_text">
-                                        9 февраля 2012 года компания представила прототип новой модели — кроссовер под названием Tesla Model X. Тогда же Илон Маск заявил, что производство модели планируется начать в 2013 году. Изначально планировалось, что в конце 2014 года будут поставлены небольшие партии, а полноценный выпуск модели начнётся в 2015 году. Однако, в феврале 2014 года было заявлено, что начало поставок ожидается только во втором квартале 2015 года. В ноябре начало поставок было вновь перенесено, на этот раз на третий квартал 2015 года.
-                                        <br><br>
-                                        По сравнению с Model S внесены следующие изменения: добавлен 3-й ряд сидений, автоматически открывающиеся задние двери вверх для входа пассажиров во 2-й и 3-й ряд, возможность заказать модель с двумя моторами.
-                                        <br><br>
-                                        В 1-м квартале 2016 года было продано 2400 Tesla Model X.
-                                        <br><br>   
-                                        Среди причин задержки выпуска Tesla Model X были проблемы с дверьми в форме крыла чайки и охлаждением двигателей.
-                                        <br><br>
-                                        Первыми автомобиль получат покупатели, резервировавшие его более трёх лет назад и внёсшие депозит в 40 тысяч долларов. Предзаказ оформили около 25 тысяч человек, время ожидания поставок для новых покупателей — от 8 до 12 месяцев. В Tesla ожидают, что половину их будущих продаж составят кроссоверы.
-                                        <br><br>
-                                        Tesla Motors планирует расширить свою аудиторию за счёт женщин с детьми и позиционирует Model X как «самый безопасный SUV за всю историю» и семейный автомобиль для путешествий (машина может тянуть автоприцеп массой более двух тонн). В целом же сегмент дорогих SUV в августе 2015 года вырос в США на 17%, впятеро лучше всего авторынка.
-                                        <br><br>
-                                        В 2016 году Tesla Model X начнут собирать и на европейском заводе компании в нидерландском Тилбурге. Летом 2017 года данный автомобиль появился в России. Его сфотографировали на улицах Воронежа.
+                                        <p th:text="#{lineup.modelX.more1}"></p> <br>
+                                        <p th:text="#{lineup.modelX.more2}"></p> <br>
+                                        <p th:text="#{lineup.modelX.more3}"></p> <br>
+                                        <p th:text="#{lineup.modelX.more4}"></p> <br>
+                                        <p th:text="#{lineup.modelX.more5}"></p> <br>
+                                        <p th:text="#{lineup.modelX.more6}"></p> <br>
+                                        <p th:text="#{lineup.modelX.more7}"></p> <br>
                                     </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.close}">Закрыть</button>
                                     </div>
                                 </div>
                                 </div>
@@ -329,9 +311,9 @@
                         </div>
                         <div class="model_descr">
                             <div class="model_subtitle">Tesla Model 3</div>
-                            <div class="model_text">Model 3 изначально носила названия Model E и BlueStar, текущее название было анонсировано 15 июля 2014 года. Ожидалось, что модель будет представлена в марте 2016 года.</div>
+                            <div class="model_text" th:text="#{lineup.model3.brief}">Model 3 изначально носила названия Model E и BlueStar, текущее название было анонсировано 15 июля 2014 года. Ожидалось, что модель будет представлена в марте 2016 года.</div>
 
-                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#mod3_mod">Читать далее</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#mod3_mod" th:text="#{button.readmore}">Читать далее</button>
 
                                 <!-- Modal -->
                             <div class="modal fade bd-example-modal-lg" id="mod3_mod" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel4" aria-hidden="true">
@@ -347,47 +329,29 @@
                                     <video width="100%" height="400" controls="controls" poster="video/model_3_pre.jpg" src="video/model_3_vid.mp4" class="vid_cl"></video>
                                     <audio controls src="audio/model_3_aud.mp3" class="aud_cl"></audio>
                                     <div class="modal_text">
-                                        Model 3 изначально носила названия Model E и BlueStar, текущее название было анонсировано 15 июля 2014 года. Ожидалось, что модель будет представлена в марте 2016 года.
-                                        <br><br>
-                                        30 июля 2007 года Мартин Эбергартд сообщил, что автомобиль поступит в продажу к 2012 году. Ожидаемая цена модели в США составляла не более 30 000 долларов[источник не указан 1090 дней.
-                                        <br><br>
-                                        Model 3 была представлена 1 апреля 2016 года. За первую неделю машину зарезервировали 325 тыс. человек, внеся депозит в одну тысячу долларов. По словам Маска, такой значительный объём заказов должен был привести к корректировке производственных планов компании.
-                                        <br><br>
-                                        Производство стартовало в 2017 году. Цена стандартной версии — 35 000 долларов, дальность поездки в базовой модели равна 350 км. Автомобиль на 20 % компактнее Model S.
-                                        <br><br>
-                                        Изначально электромобиль должен был называться Tesla Model Е, но компания Ford подала на Tesla Motors в суд, который и выиграла, получив право на название Model E.
-                                        <br><br>
-                                        1 апреля 2016 года в день презентации прототипа модели было открыто резервирование. К началу презентации компания получила 115 тыс. заявок. Всего за первые сутки машину зарезервировали 180 тыс. человек, внеся депозит в одну тысячу долларов. Это число превысило общее число продаж автомобилей компании за всю историю. Число заказов за первые три дня достигло 276 тыс., за первую неделю — 325 тыс., а к 16 мая 2016 года достигло 373 тыс. Через день после старта резервирования Илон Маск сообщил, что компания будет вынуждена пересмотреть собственный производственный план.
-                                        <br><br>
-                                        19 мая стало известно, что Tesla Motors продаст собственных акций на $1,4 млрд и пустит привлечённые средства на расширение производства до 500 тыс. автомобилей уже к 2018 году.
-                                        <br><br>
-                                        31 мая 2016 года на ежегодном собрании акционеров Илон Маск объявил, что владельцы Model 3 будут платить за пользование фирменной сетью зарядных станций Supercharger или должны приобрести соответствующую опцию. Причиной этого решения компания назвала желание максимально уменьшить начальную стоимость автомобиля.
-                                        <br><br>
-                                        2 июня Маск сообщил, что разработка Model 3 практически завершена, и компания планирует окончить разработку через шесть недель, оставив любые новые идеи для следующих версий. Также было объявлено, до конца 2016 года состоится мероприятие, посвящённое Model 3. Издание The Verge предполагает, что речь шла о презентации готовой к производству версии электромобиля.
-                                        <br><br>
-                                        28 июля 2017 года журналистам и сотрудникам компании были представлены первые 30 серийных Tesla Model 3. Приоритет в очереди на получение достался сотрудникам компании.
-                                        <br><br>
-                                        Первые поставки не связанные с компанией заказчикам планировались на ноябрь—декабрь 2017 года. Поставки Tesla Model 3 в стандартной комплектации за 35 000$ планировалось начать в конце 2017, а весной 2018 года поставлять версии с 2 моторами (D), в дальнейшем с улучшенной производительностью (PD). Первые поставки Tesla Model 3 за пределы США планировалось начать в конце 2018, а выпуск версии с правым рулём только в 2019 году.
-                                        <br><br>
-                                        В 3 квартале 2017 года было произведено 260 Tesla Model 3.
-                                        <br><br>
-                                        В 4 квартале 2017 года произведено 2425 автомобилей.
-                                        <br><br>
-                                        В 1 квартале 2018 года произвели 9766 автомобилей.
-                                        <br><br>
-                                        Во 2 квартале 2018 года было произведено 28 578 автомобилей. До 2 квартала 2018 в производстве была только Long Range версия с одним мотором(RWD).
-                                        <br><br>
-                                        Во 2 квартале 2018 года началось производство и поставки версии с двумя моторами и улучшенной производительностью. Для всех вышеперечисленных версий предполагаемый запас хода составляет 310 миль(500 км).
-                                        <br><br>
-                                        В 3 квартале 2018 года было произведено 53 239 автомобилей, причём электромобилей с двумя моторами было произведено больше, чем с одним. 13 октября 2018 года с конвейера сошел электромобиль Tesla Model 3 под порядковым номером 100 000.
-                                        <br><br>
-                                        В 4 квартале 2018 года было произведено 61 394 автомобилей, всего за 2018 год было изготовлено 145 846 экземпляров Model 3. Таким образом, Model 3 стала самым продаваемым электромобилем в 2018 году, обойдя Nissan Leaf и BAIC EC. И это несмотря на то, что в 2018 году цена на самые доступные модификации Model 3 была от 45 000 долларов(производство базовой версии ценой от 35 000 долларов планируют запустить в 2019 году) , а продажи за пределами Северной Америки ещё не начались.
-                                        <br><br>
-                                        В 1 квартале 2019 года было произведено 62 950 Model 3, во втором квартале 2019 года - 72 531 Model 3. В первом квартале 2019 года начались продажи Model 3 за пределами Северной Америки, прежде всего в Европе и Китае. В первом-втором квартале 2019 года в Европе были доступны только машины с левым рулём и в дорогих комплектациях. Первые Model 3 с правым рулём прибыли в Великобританию в конце июня-начале июля 2019 года.
+                                        <p th:text="#{lineup.model3.more1}"></p> <br>
+                                        <p th:text="#{lineup.model3.more2}"></p> <br>
+                                        <p th:text="#{lineup.model3.more3}"></p> <br>
+                                        <p th:text="#{lineup.model3.more4}"></p> <br>
+                                        <p th:text="#{lineup.model3.more5}"></p> <br>
+                                        <p th:text="#{lineup.model3.more6}"></p> <br>
+                                        <p th:text="#{lineup.model3.more7}"></p> <br>
+                                        <p th:text="#{lineup.model3.more8}"></p> <br>
+                                        <p th:text="#{lineup.model3.more9}"></p> <br>
+                                        <p th:text="#{lineup.model3.more10}"></p> <br>
+                                        <p th:text="#{lineup.model3.more11}"></p> <br>
+                                        <p th:text="#{lineup.model3.more12}"></p> <br>
+                                        <p th:text="#{lineup.model3.more13}"></p> <br>
+                                        <p th:text="#{lineup.model3.more14}"></p> <br>
+                                        <p th:text="#{lineup.model3.more15}"></p> <br>
+                                        <p th:text="#{lineup.model3.more16}"></p> <br>
+                                        <p th:text="#{lineup.model3.more17}"></p> <br>
+                                        <p th:text="#{lineup.model3.more18}"></p> <br>
+                                        <p th:text="#{lineup.model3.more19}"></p> <br>
                                     </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.close}">Закрыть</button>
                                     </div>
                                 </div>
                                 </div>
@@ -405,9 +369,9 @@
                         </div>
                         <div class="model_descr">
                             <div class="model_subtitle">Tesla Model Y</div>
-                            <div class="model_text">Электрический кроссовер среднего класса, представленный в марте 2019 года. Серийное производство начато на фабрике во Фримонте в январе 2020, а поставки потребителям — 13 марта 2020.</div>
+                            <div class="model_text" th:text="#{lineup.modelY.brief}">Электрический кроссовер среднего класса, представленный в марте 2019 года. Серийное производство начато на фабрике во Фримонте в январе 2020, а поставки потребителям — 13 марта 2020.</div>
 
-                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modY_mod">Читать далее</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#modY_mod" th:text="#{button.readmore}">Читать далее</button>
 
                                 <!-- Modal -->
                             <div class="modal fade bd-example-modal-lg" id="modY_mod" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel5" aria-hidden="true">
@@ -423,21 +387,16 @@
                                     <video width="100%" height="400" controls="controls" poster="video/model_Y_pre.jpg" src="video/model_Y_vid.mp4" class="vid_cl"></video>
                                     <audio controls src="audio/model_Y_aud.mp3" class="aud_cl"></audio>
                                     <div class="modal_text">
-                                        Электрический кроссовер среднего класса, представленный в марте 2019 года. Серийное производство начато на фабрике во Фримонте в январе 2020, а поставки потребителям — 13 марта 2020.
-                                        <br><br>
-                                        Первые упоминания про электрический кроссовер Tesla Model Y датируются 2015-2016 гг.: тогда Илон Маск порой обещал двери Falcon Wings, раздумывал о собственной платформе для новинки, рассказывал о новом заводе. Однако победил прагматизм и желание поскорее запустить электрокар в производство: кроссовер Tesla Model Y построен с использованием компонентов Tesla Model 3 (два электромобиля технически родственники на 75%), задние двери выполнены обычным способом, а первый экземпляр Tesla Model Y приехал из США. Что, впрочем, не отменяет факта: Tesla Model Y – это полностью самостоятельная модель.
-                                        <br><br>
-                                        Прежде всего, электрический кроссовер Tesla Model Y оказывается несколько крупнее седана Tesla Model 3 по габаритам. Так, длина составляет 4,75 м, ширина равна 1,92 м, а больше всего отличается высота кузова – 1,62 м. Плюс кроссовер получил 2,89-метровую колесную базу и 17-сантиметровый клиренс (167 мм, если точно). При этом оба автомобиля максимально похожи спереди и сзади – не ровен час их спутать: похожи фары и фонари, схожие обводы переднего бампера и гладкого капота, лишь задний бампер слегка изменился в нижней части. При взгляде на боковину отличия более заметны. Прежде всего, сразу заметен более высокий «купол» крыши. Кроме того, кроссовер Tesla Model Y получил приметные увеличенные окошки сзади. Пожалуй, пригодятся для пассажиров третьего ряда. Да-да, производитель заявляет для Tesla Model Y опциональный 7-местный салон, что также выделяет кроссовер на фоне седана.
-                                        <br><br>
-                                        Передняя панель также практически идентична Tesla Model 3: массивная деревянная вставка, горизонтальный 15-дюймовый дисплей, отсутствие привычных приборов и дефлекторов вентиляции. Вместо последних – щель во всю ширину салона, через которую подается воздух. Похожи передние сиденья и дверные карты в стиле «минимализм»: нейтрально-серая цветовая гамма, вставка из алькантары, кнопки с черной глянцевой отделкой. Много глянца и на центральной консоли – два вместительных бокса прикрыты крышками с микролифтом. В целом: все знакомо и узнаваемо относительно Tesla Model 3.
-                                        <br><br>
-                                        Но стоит лишь пересесть назад – и вы сразу увидите разницу. Даже не так: не увидите – а почувствуете. Своими ногами и ступнями, для которых наконец предложено вдоволь места. В который раз утверждаю: кузов «кроссовер» оптимален для электромобиля с аккумулятором в днище. Так можно обеспечить более высокую посадку для пассажиров второго ряда, установить передние кресла повыше – и, как результат, выиграть место для ног, коленей, ступней. Вот вам первое важное преимущество кроссовера над седаном Tesla Model 3. А если добавить панорамную крышу, регулировку заднего дивана по углу наклона, дефлекторы вентиляции и подогрев для пассажиров, то электрокар Tesla Model Y и вовсе выглядит хорошистом. Вот только – снова «минимализм». Не видите на фото кнопок подогрева дивана? Их нет: управление подогревом дивана сзади осуществляется через центральный дисплей в передней части салона. В этом есть и преимущества и недостатки. Минус – пассажиры не могут сами включать/отключать подогрев. Плюс – водителю удобно выключать подогрев: к примеру, после того, как высадил детей у школы.
-                                        <br><br>
-                                        Теперь второе важное преимущество Tesla Model Y и его типа кузова: багажник. Покатая задняя дверь поднимается высоко и открывает огромный проем, через который в багажник удобно грузить крупногабаритные вещи. При 5-местном салоне объем багажника составляет около 500 литров, а если сложит второй ряд сидений – то получите 1 926 литров. Плюс две ниши в подполье (для зарядных проводов или набора автомобилиста), плюс электропривод крышки багажника, плюс кнопки складывания задних сидений… Еще бы шторка багажника не помешала – а вот ее как раз и нет. Зато есть второй маленький багажник под капотом.
+                                        <p th:text="#{lineup.modelY.more1}"></p> <br>
+                                        <p th:text="#{lineup.modelY.more2}"></p> <br>
+                                        <p th:text="#{lineup.modelY.more3}"></p> <br>
+                                        <p th:text="#{lineup.modelY.more4}"></p> <br>
+                                        <p th:text="#{lineup.modelY.more5}"></p> <br>
+                                        <p th:text="#{lineup.modelY.more6}"></p> <br>
                                     </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.close}">Закрыть</button>
                                     </div>
                                 </div>
                                 </div>
@@ -455,9 +414,9 @@
                         </div>
                         <div class="model_descr">
                             <div class="model_subtitle">Tesla Semi</div>
-                            <div class="model_text">16 ноября 2017 Tesla провела презентацию электрического тягача Tesla Semi, производство которого начнется в 2021 году. Запас хода у электрогрузовика составляет примерно 800 км (возможно 900 км) при загрузке в 40 тонн.</div>
+                            <div class="model_text" th:text="#{lineup.semi.brief}">16 ноября 2017 Tesla провела презентацию электрического тягача Tesla Semi, производство которого начнется в 2021 году. Запас хода у электрогрузовика составляет примерно 800 км (возможно 900 км) при загрузке в 40 тонн.</div>
 
-                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#semi_mod">Читать далее</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#semi_mod" th:text="#{button.readmore}">Читать далее</button>
 
                                 <!-- Modal -->
                             <div class="modal fade bd-example-modal-lg" id="semi_mod" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel6" aria-hidden="true">
@@ -473,25 +432,18 @@
                                     <video width="100%" height="400" controls="controls" poster="video/semi_pre.jpg" src="video/semi_vid.mp4" class="vid_cl"></video>
                                     <audio controls src="audio/semi_aud.mp3" class="aud_cl"></audio>
                                     <div class="modal_text">
-                                        16 ноября 2017 Tesla провела презентацию электрического тягача Tesla Semi, производство которого начнется в 2021 году. Запас хода у электрогрузовика составляет примерно 800 км (возможно 900 км) при загрузке в 40 тонн.
-                                        <br><br>
-                                        Хотя иногда автомобиль называют первым в мире представителем класса электрогрузовиков, он был представлен позже MFTBC E-Fuso Vision One.
-                                        <br><br>
-                                        Разработкой грузовика руководит Джером Гильен, бывший программный директор Tesla S и вице-президент по проектированию транспортных средств.
-                                        <br><br>
-                                        Первоначально презентация грузовика была запланирована на сентябрь 2017 года. 4 октября 2017, за три недели до официального анонса, на сайте Reddit один из пользователей опубликовал фотографию автомобиля, который может быть грузовиком Tesla, однако в компании отказались комментировать появившееся фото. Во время выступлений на презентации модели Semi учредитель компании отметил, что производство подобного электрического грузовика станет новым шагом в сторону освобождения экономики от использования ископаемого топлива. На презентации, которая прошла 16 ноября 2017, стали известны технические характеристики грузовика: на одном заряде аккумулятора он может проехать до 800 километров; без груза Semi может разогнаться до 100 км/ч за 5 секунд, при полной загрузке (36 тонн) — за 20 секунд; коэффициент аэродинамического сопротивления кабины (Cx) заявлен на уровне 0,36. Время полной зарядки аккумулятора составляет 40 минут (при этом на 80 % он заряжается за 30 минут).
-                                        <br><br>
-                                        Грузовик относится к 8 классу (по американской классификации) с максимальной разрешённой массой более 15 тонн. Стёкла грузовика изготовлены из специального усиленного стекла и отличаются повышенной прочностью.
-                                        <br><br>
-                                        Протестировать работу каравана автомобилей в беспилотном режиме компания собирается (2017) в пустыне штата Невада. В конце января 2018 года появились свидетельства того, что в калифорнийском Саннивейле компания начала испытания грузовика на дорогах общего пользования.
-                                        <br><br>
-                                        Выпуск Tesla Semi изначально планировали начать в 2019 году. Позднее начало производства было перенесено на 2020 год.
-                                        <br><br>
-                                        9 июня 2020 года Илон Маск заявил, что электрический тягач готов: «Пришло время сделать всё возможное и довести Tesla Semi Truck до серийного производства. До сих пор оно было ограниченным, что позволило нам улучшить его». В результате 10 июня впервые в истории акции Tesla стали стоить более 1 тыс. долларов за штуку, а капитализация компании превысила 185 млрд долларов. По этому показателю Tesla обошла японскую Toyota, став самым дорогим автопроизводителем в мире.
+                                        <p th:text="#{lineup.semi.more1}"></p> <br>
+                                        <p th:text="#{lineup.semi.more2}"></p> <br>
+                                        <p th:text="#{lineup.semi.more3}"></p> <br>
+                                        <p th:text="#{lineup.semi.more4}"></p> <br>
+                                        <p th:text="#{lineup.semi.more5}"></p> <br>
+                                        <p th:text="#{lineup.semi.more6}"></p> <br>
+                                        <p th:text="#{lineup.semi.more7}"></p> <br>
+                                        <p th:text="#{lineup.semi.more8}"></p> <br>
                                     </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.close}">Закрыть</button>
                                     </div>
                                 </div>
                                 </div>
@@ -509,9 +461,9 @@
                         </div>
                         <div class="model_descr">
                             <div class="model_subtitle">Tesla Cybertruck</div>
-                            <div class="model_text">21 ноября 2019 года компания представила электрический пикап Tesla Cybertruck. Спустя пять дней после презентации автомобиль собрал 250 000 предзаказов.</div>
+                            <div class="model_text" th:text="#{lineup.cybertruck.brief}">21 ноября 2019 года компания представила электрический пикап Tesla Cybertruck. Спустя пять дней после презентации автомобиль собрал 250 000 предзаказов.</div>
 
-                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#cyber_mod">Читать далее</button>
+                            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#cyber_mod" th:text="#{button.readmore}">Читать далее</button>
 
                                 <!-- Modal -->
                             <div class="modal fade bd-example-modal-lg" id="cyber_mod" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel7" aria-hidden="true">
@@ -527,44 +479,29 @@
                                     <video width="100%" height="400" controls="controls" poster="video/cyber_pre.jpg" src="video/cyber_vid.mp4" class="vid_cl"></video>
                                     <audio controls src="audio/cyber_aud.mp3" class="aud_cl"></audio>
                                     <div class="modal_text">
-                                        21 ноября 2019 года компания представила электрический пикап Tesla Cybertruck. Спустя пять дней после презентации автомобиль собрал 250 000 предзаказов.
-                                        <br><br>
-                                        Обладает запасом хода на 400—800 км, а также пневмоподвеской, подстраивающейся под нагрузку. Есть опция герметичности и розетки в кузове на 110 и 220 вольт. Производство запланировано на конец 2021 года.
-                                        <br><br>
-                                        В 2012 и 2013 годах Маск обсуждал создание пикапа, схожего с Ford F-250. В раннем 2014 Маск предсказывал 4-5 лет перед созданием такой машины.
-                                        <br><br>
-                                        В 2016 Маск говорил о создании пикапа с совершенно новыми свойствами. Возможно создание рамы и подвески для создания пикапа или небольшого фургона. В позднем 2017 размер был определён как, по меньшей мере Ford F-150, причем со свойством «изменяющий игру». В процессе выкаток Tesla Semi и Tesla Roadster в ноябре 2017-го показывали картинку пикапа, способного перевозить пикап. Идеи этого пикапа прорабатывались 5 лет, по меньшей мере.
-                                        <br><br>
-                                        В позднем 2018 Tesla работала над двумя гранями своего пикапа. Первая грань — это использование основы Mercedes-Benz Sprinter с добавленными Tesla электрической трансмиссией, батареей и электроникой. Вторая грань — это производство собственного пикапа Tesla, что, требует больше времени. Прототип этого фургона был отвергнут в течение подготовки к шоу в 2019-м.
-                                        <br><br>
-                                        В марте 2019, сразу после запуска Tesla Model Y, Илон Маск показывал изображение пикапа и говорил, что он будет в стиле киберпанк и не всем понравится из-за его футуристичных форм и стиля персонального защищенного транспорта.
-                                        <br><br>
-                                        В течение презентации, которая состоялась 21 ноября 2019 года, Маск демонстрировал материалы, из которых сделан Tesla Cybertruck. А это нержавеющая сталь и особо прочное стекло. Особо прочное стекло не разбилось в тесте прямо на презентации, но когда Франц фон Хольцхаузен металлическим шаром попытался разбить стекла в машине, они разбились. Маск пошутил, что «ему есть над чем поработать». И что «мы это сотрем на видео».
-                                        <br><br>
-                                        Перед концом презентации Маск показал Tesla ATV — полностью электрический квадроцикл. Его закатили в Tesla Cybertruck по рампе и, при том, он мог заряжаться от него. (от розетки 120 вольт);
-                                        <br><br>
-                                        Все модели Cybertruck имеют следующие характеристики: 250 Кватт Supercharge, автопилот, рессорную подвеску, выводы розеток на 110 и 220 вольт. Машины имеют экзоскелет (несущую конструкцию кузова) в отличие от рамы в обычных пикапах. Подобно всем другим машинам Tesla, можно заказать автопилот заплатив дополнительные 7000 долларов в цену всей конфигурации.
-                                        <br><br>
-                                        Single motor RWD // дальность 482 км // ускорение 0-100 км/ч меньше 6.5 секунд // Максимальная скорость 170 км/ч // грузоподъёмность 1587 килограмм // прицеп вес 3400 килограмм // цена 39900 долларов //
-                                        Dual motor AWD // дальность 600 км // ускорение 0-100 км/ч меньше 4.5 секунд // максимальная скорость 193 км/ч // грузоподъёмность 1587 кг // вес прицепа более 4535 кг // цена 49900 долларов //
-                                        Tri motor AWD // дальность более 800 км // ускорение 0-100 км/ч менее 2.9 секунд // максимальная скорость 210 км/ч // грузоподъёмность 1587 кг // прицеп более 6350 кг // цена 69900 долларов //
-                                        Дополнительно Tesla подтверждает следующие размерности для всех моделей: объём багажника 2.8 кубических метров. Длина 198 см. Просвет до 40 см. Угол заезда 35 градусов. Угол съезда 28 градусов.
-                                        <br><br>
-                                        Стандартная модель будет использовать подстраивающуюся пневмоподвеску для компенсации вариаций в нагрузке и, также, будет иметь полный привод. Он будет иметь на борту инверторы для поддержки розеток на 110 и 220 вольт, позволяющие воспользоваться мощностью машины без портативного генератора. Воздушный компрессор необходимый для пневмоподвески, также присутствует. Камеры в машине позволяют выполнять автоматическую параллельную парковку.
-                                        <br><br>
-                                        Опции для батареи позволяют изменять дальность поездки от одного полного заряда от 400 до 800 км. Ёмкость батарей приблизительно 100 кВт*ч. Сиденье для водителя столь большое, что позволяет усесться в нём весьма крупному человеку. Кабина может быть защищена от шрапнели. В блоге UpShift указывается на его вес 2700 килограмм и мощность 775 лошадиных сил.
-                                        <br><br>
-                                        Опционально доступна полная герметичность кабины, которая позволит использовать Cybertruck в качестве амфибии.
+                                        <p th:text="#{lineup.cyber.more1}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more2}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more3}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more4}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more5}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more6}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more7}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more8}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more9}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more10}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more11}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more12}"></p> <br>
+                                        <p th:text="#{lineup.cyber.more13}"></p> <br>
                                     </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.close}">Закрыть</button>
                                     </div>
                                 </div>
                                 </div>
                             </div>
                                                         <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#game_m">
+                            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#game_m" th:text="#{button.testdrive}">
                                 Тест-драйв
                             </button>
                             
@@ -580,19 +517,19 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="wrapper">
-                                            <canvas width="0" height="0" class="canvas" id="canvas">Ваш браузер не поддерживает JavaScript и HTML5!</canvas>
+                                            <canvas width="0" height="0" class="canvas" id="canvas">Your browser does not support JavaScript and HTML5!</canvas>
                                         </div>
                                         <div class="game_descr">
-                                            Управление: <br><br>
-                                            Старт/Пауза: * <br>
-                                            Движение вперёд: W <br>
-                                            Движение вправо: D <br>
-                                            Движение вниз: S <br>
-                                            Движение влево: A
+                                            <p th:text="#{game.controller}"></p> <br><br>
+                                            <p th:text="#{game.start}"></p> <br>
+                                            <p th:text="#{game.forward}"></p> <br>
+                                            <p th:text="#{game.right}"></p> <br>
+                                            <p th:text="#{game.down}"></p> <br>
+                                            <p th:text="#{game.left}"></p>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{button.close}">Закрыть</button>
                                     </div>
                                 </div>
                                 </div>

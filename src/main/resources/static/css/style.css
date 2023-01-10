@@ -45,7 +45,7 @@ nav {
 
 .menu_item {
   border-right: 2px dotted black;
-  padding-right: 26px;
+  padding-right: 18px;
 }
 
 .menu_item:last-child {
@@ -401,6 +401,12 @@ nav {
   margin-top: 25px;
 }
 
+.modal_text p {
+  padding: 0;
+  margin: 0;
+}
+
+
 .gallery {
   padding: 80px auto 0 auto;
   min-height: 600px;
@@ -548,9 +554,14 @@ tr:hover td {color: #6699ff;}
 }
 
 .game_descr {
-  margin: 10px auto 10px 10px;
+  margin: 5px auto 10px 2px;
   font-weight: 400;
   font-size: 18px;
+}
+
+.game_descr p {
+  margin: 0;
+  padding: 0;
 }
 
 .alertm_overlay {  
@@ -812,4 +823,57 @@ a.alertm_close {
 
 .starter-template {
   margin: 100px;
+}
+
+
+
+.dropbtn {
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 60px;
+  padding-left: 6px;
+}
+
+.dropbtn {
+  color: white;
+}
+
+.dropdown-content a:first-child {
+  background: url('../icons/ua-icon.png') no-repeat left center;
+}
+
+.dropdown-content a:nth-child(2) {
+  background: url('https://icons.iconarchive.com/icons/fatcow/farm-fresh/16/flag-usa-icon.png') no-repeat left center;
+}
+
+.dropdown-content a:last-child {
+  background: url('http://icons.iconarchive.com/icons/custom-icon-design/flag-3/16/Russia-Flag-icon.png') no-repeat left center;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 2px 0 2px 25px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover
+.dropdown-content a:hover {background-color: -moz-default-background-color}*/
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
