@@ -1,7 +1,7 @@
 var arrHead = new Array();
 
 arrHead = [
-    ['Модель', 'Год выпуска', 'Цена($)', 'Запас хода(км)', 'Скорость(км/ч)', '', '', ''],
+    ['Model', 'Year of release', 'Price($)', 'Power reserve(km)', 'Speed(km/h)', '', '', ''],
     ['Tesla Roadster', '2008', '200000', '1000', '402'],
     ['Tesla Model S', '2012', '41799', '426', '250'],
     ['Tesla Model X', '2015', '72144', '411', '250'],
@@ -176,7 +176,7 @@ function addRow() {
             case 5:
                 button_delete = document.createElement('input');
                 button_delete.setAttribute('type', 'button');
-                button_delete.setAttribute('value', 'Удалить');
+                button_delete.setAttribute('value', 'Delete');
                 button_delete.setAttribute('onclick', 'removeRow(this)');
 
                 td.appendChild(button_delete);
@@ -185,7 +185,7 @@ function addRow() {
             case 6:
                 button_edit = document.createElement('input');
                 button_edit.setAttribute('type', 'button');
-                button_edit.setAttribute('value', 'Изменить');
+                button_edit.setAttribute('value', 'Change');
                 button_edit.setAttribute('onclick', 'editRow(this)');
 
                 td.appendChild(button_edit);
@@ -194,7 +194,7 @@ function addRow() {
             case 7:
                 button_save_edit = document.createElement('input');
                 button_save_edit.setAttribute('type', 'button');
-                button_save_edit.setAttribute('value', 'Сохранить');
+                button_save_edit.setAttribute('value', 'Save');
                 button_save_edit.setAttribute('onclick', 'saveEditRow(this)');
 
                 td.appendChild(button_save_edit);

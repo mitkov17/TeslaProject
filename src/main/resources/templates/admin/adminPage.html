@@ -20,8 +20,8 @@
     <nav>
         <div class="container">
             <ul class="menuPark">
-                <li class="menuPark_item"><a href="/index" class="menu_link">Главная</a></li>
-                <li class="menuPark_item"><a href="/shop" class="menu_link">Магазин</a></li>
+                <li class="menuPark_item"><a href="/index" class="menu_link" th:text="#{nav.main}">Главная</a></li>
+                <li class="menuPark_item"><a href="/shop" class="menu_link" th:text="#{nav.shop}">Магазин</a></li>
             </ul>
         </div>
     </nav>
@@ -30,12 +30,12 @@
 <section id="spec" class="pageSection">
     <div class="container">
         <div class="label">users</div>
-        <div class="title2">таблица с пользователями</div>
+        <div class="title2" th:text="#{admin.users}">таблица с пользователями</div>
         <div class="row" >
             <div class="col-md-12" >
 
                 <div th:if="${people.isEmpty()}">
-                    <p>В системе пока не зарегистрирован ни один пользователь</p>
+                    <p th:text="#{admin.nousers}">В системе пока не зарегистрирован ни один пользователь</p>
                     <hr/>
                 </div>
 
@@ -44,12 +44,12 @@
                     <br/>
                     <table>
                         <tr>
-                            <th>Полное имя</th>
-                            <th>Никнейм</th>
-                            <th>Телефон</th>
-                            <th>Эл.адрес</th>
-                            <th>Дата рождения</th>
-                            <th>Роль</th>
+                            <th th:text="#{admin.users.name}">Полное имя</th>
+                            <th th:text="#{admin.users.nickname}">Никнейм</th>
+                            <th th:text="#{admin.users.phone}">Телефон</th>
+                            <th th:text="#{admin.users.email}">Эл.адрес</th>
+                            <th th:text="#{admin.users.birthday}">Дата рождения</th>
+                            <th th:text="#{admin.users.role}">Роль</th>
                         </tr>
                         <tr th:each="person : ${people}">
                             <td><span th:text="${person.getFullName()}">person</span></td>
@@ -70,24 +70,24 @@
 <section id="spec1" class="specific">
     <div class="container">
         <div class="label">products</div>
-        <div class="title2">таблица с товарами</div>
+        <div class="title2" th:text="#{admin.products}">таблица с товарами</div>
         <div class="row" >
             <div class="col-md-12" >
 
                 <div th:if="${products.isEmpty()}">
-                    <p>В системе пока не зарегистрирован ни один товар</p>
+                    <p th:text="#{admin.noproducts}">В системе пока не зарегистрирован ни один товар</p>
                     <hr/>
                 </div>
 
                 <div th:if="${!products.isEmpty()}">
                     <hr/>
-                    <br/>
+                    <br/>`
                     <table>
                         <tr>
-                            <th>Бренд</th>
-                            <th>Модель</th>
-                            <th>Год выпуска</th>
-                            <th>Цена</th>
+                            <th th:text="#{admin.products.brand}">Бренд</th>
+                            <th th:text="#{admin.products.model}">Модель</th>
+                            <th th:text="#{admin.products.year}">Год выпуска</th>
+                            <th th:text="#{admin.products.price}">Цена</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -97,15 +97,15 @@
                             <td><span th:text="${product.getYearOfRelease()}">product</span></td>
                             <td><span th:text="${product.getPrice()}">product</span></td>
                             <td><form th:method="GET" th:action="@{/admin/editProduct/{id}(id=${product.getId()})}">
-                                <input class="btn btn-warning" type="submit" value="Редактировать"/>
+                                <input class="btn btn-warning" type="submit" th:value="#{admin.button.edit}"/>
                             </form></td>
                             <td><form th:method="DELETE" th:action="@{/admin/products/{id}(id=${product.getId()})}">
-                                <input class="btn btn-danger" type="submit" value="Удалить"/>
+                                <input class="btn btn-danger" type="submit" th:value="#{admin.button.delete}"/>
                             </form></td>
                         </tr>
                     </table>
                     <hr/>
-                    <a class="btn btn-primary" href="/admin/newProduct" role="button">Добавить товар</a>
+                    <a class="btn btn-primary" href="/admin/newProduct" role="button" th:text="#{admin.button.add}">Добавить товар</a>
                 </div>
             </div>
         </div>
@@ -117,12 +117,12 @@
 <section id="spec2" class="pageSection">
     <div class="container">
         <div class="label">orders</div>
-        <div class="title2">таблица с заказами</div>
+        <div class="title2" th:text="#{admin.orders}">таблица с заказами</div>
         <div class="row" >
             <div class="col-md-12" >
 
                 <div th:if="${orders.isEmpty()}">
-                    <p>В системе пока не зарегистрирован ни один заказ</p>
+                    <p th:text="#{admin.noorders}">В системе пока не зарегистрирован ни один заказ</p>
                     <hr/>
                 </div>
 
@@ -131,10 +131,10 @@
                     <br/>
                     <table>
                         <tr>
-                            <th>ID заказа</th>
-                            <th>Дата заказа</th>
-                            <th>Никнейм заказчика</th>
-                            <th>Электромобиль</th>
+                            <th th:text="#{admin.orders.id}">ID заказа</th>
+                            <th th:text="#{admin.orders.date}">Дата заказа</th>
+                            <th th:text="#{admin.orders.nickname}">Никнейм заказчика</th>
+                            <th th:text="#{admin.orders.vehicle}">Электромобиль</th>
                             <th></th>
                         </tr>
                         <tr th:each="order : ${orders}">
@@ -143,7 +143,7 @@
                             <td><span th:text="${order.getCustomer().getUsername()}">order</span></td>
                             <td><span th:text="${order.getProduct().getBrand() + ' ' + order.getProduct().getProductName()}">order</span></td>
                             <td><form th:method="DELETE" th:action="@{/admin/orders/{id}(id=${order.getId()})}">
-                                <input class="btn btn-danger confBtn" type="submit" value="Удалить"/>
+                                <input class="btn btn-danger confBtn" type="submit" th:value="#{admin.button.delete}"/>
                             </form></td>
                         </tr>
                     </table>
@@ -153,7 +153,7 @@
         </div>
     </div>
     <form th:action="@{/logout}" th:method="POST">
-        <input class="btn btn-danger logoutBtn" type="submit" value="Выйти из аккаунта"/>
+        <input class="btn btn-danger logoutBtn" type="submit" th:value="#{admin.button.quit}"/>
     </form>
 </section>
 

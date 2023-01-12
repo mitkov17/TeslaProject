@@ -20,7 +20,7 @@
     <nav>
         <div class="container">
             <ul class="menuPark">
-                <li class="menuPark_item"><a href="/index" class="menu_link">Главная</a></li>
+                <li class="menuPark_item"><a href="/index" class="menu_link" th:text="#{nav.main}">Главная</a></li>
                 <li class="menu_item" sec:authorize="isAuthenticated()">
                     <a class="menu_link" sec:authorize="hasRole('ROLE_ADMIN')" sec:authentication="name" th:href="@{/admin/adminPage}"></a>
                     <a class="menu_link" sec:authorize="hasRole('ROLE_USER')" sec:authentication="name" th:href="@{/people/personPage}"></a>
@@ -35,11 +35,11 @@
         <aside class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
             <form th:method="POST" class="search" th:action="@{/shop/search}">
                 <div class="panel panel-success panel-aside-my">
-                    <div class="panel-heading panel-my-header">Найти товар</div>
+                    <div class="panel-heading panel-my-header" th:text="#{shop.search}">Найти товар</div>
                     <div class="panel-body">
                         <div class="list-body">
                             <div class="input-group mb-3">
-                                <input type="text" id="query" name="query" class="form-control" placeholder="Искать товар" aria-label="" aria-describedby="basic-addon1">
+                                <input type="text" id="query" name="query" class="form-control" th:placeholder="#{shop.search.placeholder}" aria-label="" aria-describedby="basic-addon1">
                                 <div class="input-group-prepend">
                                     <input type="submit" id="goSearch" value="Go!" class="btn btn-success">
                                 </div>
@@ -50,7 +50,7 @@
             </form>
             <!-- TODO -->
             <div class="panel panel-success panel-aside-my">
-                <div class="panel-heading panel-my-header">Бренды</div>
+                <div class="panel-heading panel-my-header" th:text="#{shop.brands}">Бренды</div>
                 <div class="panel-body">
                     <div class="list-group">
                         <a href="/shop?find_by_brand=Tesla" class="list-group-item list-group-item-action list-group-item-light">Tesla</a>
@@ -61,12 +61,12 @@
             </div>
 
             <div class="panel panel-success panel-aside-my">
-                <div class="panel-heading panel-my-header">Сортировать по</div>
+                <div class="panel-heading panel-my-header" th:text="#{shop.sort}">Сортировать по</div>
                 <div class="panel-body">
                     <div class="list-group">
-                        <a href="/shop?sort_by=idd" class="list-group-item list-group-item-action list-group-item-light">Обычный порядок</a>
-                        <a href="/shop?sort_by=priceA" class="list-group-item list-group-item-action list-group-item-light">Возрастанию цены</a>
-                        <a href="/shop?sort_by=priceD" class="list-group-item list-group-item-action list-group-item-light">Убыванию цены</a>
+                        <a href="/shop?sort_by=idd" class="list-group-item list-group-item-action list-group-item-light" th:text="#{shop.sort.normal}">Обычный порядок</a>
+                        <a href="/shop?sort_by=priceA" class="list-group-item list-group-item-action list-group-item-light" th:text="#{shop.sort.increase}">Возрастанию цены</a>
+                        <a href="/shop?sort_by=priceD" class="list-group-item list-group-item-action list-group-item-light" th:text="#{shop.sort.descending}">Убыванию цены</a>
                     </div>
                 </div>
             </div>
@@ -84,13 +84,13 @@
                                 <h4 th:text="${product.getBrand()} + ' ' + ${product.getProductName()}" class="nameTr">product</h4>
                                 <hr>
                                 <ul class="list-group">
-                                    <li class="list-group-item"><small>Бренд: </small> <span th:text="${product.getBrand()}" class="brandPark">product</span></li>
-                                    <li class="list-group-item"><small>Модель: </small> <span th:text="${product.getProductName()}" class="modelPark">product</span></li>
-                                    <li class="list-group-item"><small>Год выпуска: </small> <span th:text="${product.getYearOfRelease()}" class="materialPark">product</span></li>
-                                    <li class="list-group-item"><small>Цена: </small> <span th:text="'$' + ${product.getPrice()}" class="pricePark">product</span></li>
+                                    <li class="list-group-item"><small th:text="#{shop.car.brand}">Бренд: </small> <span th:text="${product.getBrand()}" class="brandPark">product</span></li>
+                                    <li class="list-group-item"><small th:text="#{shop.car.model}">Модель: </small> <span th:text="${product.getProductName()}" class="modelPark">product</span></li>
+                                    <li class="list-group-item"><small th:text="#{shop.car.year}">Год выпуска: </small> <span th:text="${product.getYearOfRelease()}" class="materialPark">product</span></li>
+                                    <li class="list-group-item"><small th:text="#{shop.car.price}">Цена: </small> <span th:text="'$' + ${product.getPrice()}" class="pricePark">product</span></li>
                                 </ul>
                                 <div class="code">
-                                    <a class="btn btn-success float-right"  th:href="@{/shop/makeOrder/{id}(id=${product.getId()})}" th:text="Заказать">product</a>
+                                    <a class="btn btn-success float-right"  th:href="@{/shop/makeOrder/{id}(id=${product.getId()})}" th:text="#{shop.button.order}">product</a>
                                 </div>
                             </div>
                         </div>

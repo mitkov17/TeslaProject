@@ -8,28 +8,6 @@
         $('.remove-product').click(removeProductFromCart);
     };
 
-    /*var showAddProductPopup = function () {
-        var idProduct = $(this).attr('id');
-        var product = $('#product' + idProduct);
-        $('#addProductPopup').attr('data-id-product', idProduct);
-        $('#addProductPopup .product-image').attr('src', product.find('.thumbnail img').attr('src'));
-        $('#addProductPopup .name').text(product.find('.nameTr').text());
-        var price = product.find('.pricePark').text();
-
-        $('#addProductPopup .pricePark').text(price);
-
-        $('#addProductPopup .brandPark').text(product.find('.brandPark').text());
-        $('#addProductPopup .modelPark').text(product.find('.modelPark').text());
-        $('#addProductPopup .materialPark').text(product.find('.materialPark').text());
-        $('#addProductPopup .lengthPark').text(product.find('.lengthPark').text());
-        $('#addProductPopup .count').val(1);
-        $('#addProductPopup .costPark').text(price);
-
-        $('#addProductPopup').modal({
-            show:true
-        });
-    };*/
-
     var showAddProductPopup = function () {
         var idProduct = $(this).attr('id');
         var product = $('#product' + idProduct);
@@ -94,20 +72,6 @@
         }, 800);
     }
 
-    /*var adTransportToCart = function() {
-        var count = $('#addTransportPopup .count').val();
-        //var cost = $('#addTransportPopup .costPark').val();
-        var cost = 2000;
-        $('#addToCart').addClass('hidden');
-        $('#addToCartIndicator').removeClass('hidden');
-        setTimeout(function() {
-            $('.total-count').text(count);
-            $('.total-cost').text(cost);
-            $('#addTransportPopup').modal('hide');
-            $('#addToCartIndicator').addClass('hidden');
-            $('#addToCart').removeClass('hidden');
-        }, 800)
-    };*/
 
     var addProductToCart = function() {
         var count = $('#addProductPopup .count').val();

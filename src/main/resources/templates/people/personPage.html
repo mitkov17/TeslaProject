@@ -19,8 +19,8 @@
     <nav>
         <div class="container">
             <ul class="menuPark">
-                <li class="menuPark_item"><a href="/index" class="menu_link">Главная</a></li>
-                <li class="menuPark_item"><a href="/shop" class="menu_link">Магазин</a></li>
+                <li class="menuPark_item"><a href="/index" class="menu_link" th:text="#{nav.main}">Главная</a></li>
+                <li class="menuPark_item"><a href="/shop" class="menu_link" th:text="#{nav.shop}">Магазин</a></li>
             </ul>
         </div>
     </nav>
@@ -29,7 +29,7 @@
 <section id="spec" class="pageSection">
     <div class="container">
         <div class="label">user</div>
-        <div class="title2">информация о пользователе</div>
+        <div class="title2" th:text="#{users.info}">информация о пользователе</div>
         <div class="row" >
             <div class="col-md-12" >
 
@@ -38,11 +38,11 @@
                     <br/>
                     <table>
                         <tr>
-                            <th>Полное имя</th>
-                            <th>Телефон</th>
-                            <th>Эл.адрес</th>
-                            <th>Дата рождения</th>
-                            <th>Логин</th>
+                            <th th:text="#{admin.users.name}">Полное имя</th>
+                            <th th:text="#{admin.users.phone}">Телефон</th>
+                            <th th:text="#{admin.users.email}">Эл.адрес</th>
+                            <th th:text="#{admin.users.birthday}">Дата рождения</th>
+                            <th th:text="#{registration.login}">Логин</th>
                         </tr>
                         <tr>
                             <td><span th:text="${user.get().getFullName()}">person</span></td>
@@ -63,12 +63,12 @@
 <section id="spec2" class="specific">
     <div class="container">
         <div class="label">orders</div>
-        <div class="title2">таблица с заказами</div>
+        <div class="title2" th:text="#{users.orders}">таблица с заказами</div>
         <div class="row" >
             <div class="col-md-12" >
 
                 <div th:if="${orders.isEmpty()}">
-                    <p>В системе пока не зарегистрирован ни один заказ</p>
+                    <p th:text="#{admin.noorders}">В системе пока не зарегистрирован ни один заказ</p>
                     <hr/>
                 </div>
 
@@ -77,10 +77,10 @@
                     <br/>
                     <table>
                         <tr>
-                            <th>ID заказа</th>
-                            <th>Дата заказа</th>
-                            <th>Никнейм заказчика</th>
-                            <th>Электромобиль</th>
+                            <th th:text="#{admin.orders.id}">ID заказа</th>
+                            <th th:text="#{admin.orders.date}">Дата заказа</th>
+                            <th th:text="#{admin.orders.nickname}">Никнейм заказчика</th>
+                            <th th:text="#{admin.orders.vehicle}">Электромобиль</th>
                         </tr>
                         <tr th:each="order : ${orders}">
                             <td><span th:text="${order.getId()}">order</span></td>
@@ -95,7 +95,7 @@
         </div>
     </div>
     <form th:action="@{/logout}" th:method="POST">
-        <input class="btn btn-danger logoutBtn" type="submit" value="Выйти из аккаунта"/>
+        <input class="btn btn-danger logoutBtn" type="submit" th:value="#{admin.button.quit}"/>
     </form>
 </section>
 

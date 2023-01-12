@@ -545,12 +545,12 @@
 <section id="spec" class="specific">
     <div class="container">
         <div class="label">specification</div>
-        <div class="title2">таблица с характеристиками</div>
+        <div class="title2" th:text="#{specific.title}">таблица с характеристиками</div>
         <div class="row" >
             <div class="col-md-12" >
                 <div id="cont"></div>  <!-- the container to add the TABLE -->
 
-    <button id="redact" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editing">
+    <button id="redact" type="button" class="btn btn-primary" data-toggle="modal" data-target="#editing" th:text="#{button.editing}">
         Редактирование
     </button>
 
@@ -559,7 +559,7 @@
         <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel2">Редактирование</h5>
+            <h5 class="modal-title" id="exampleModalLabel2" th:text="#{button.editing}">Редактирование</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -569,39 +569,39 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="model">Модель</label>
-                            <input type="text" name="model" class="form-control" id="model" placeholder="Введите название модели" required
-                            title="Разрешено использовать только пробелы, цифры и латинские буквы"
+                            <label for="model" th:text="#{specific.modal.model}">Модель</label>
+                            <input type="text" name="model" class="form-control" id="model" th:placeholder="#{specific.modal.model.placeholder}" required
+                                   th:title="#{specific.modal.model.error}"
                             pattern="^[a-zA-Z-0-9\s]+$">
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="year">Год выпуска</label>
-                            <input type="number" name="year" class="form-control" id="year" placeholder="Введите год выпуска модели" required>
+                            <label for="year" th:text="#{specific.modal.year}">Год выпуска</label>
+                            <input type="number" name="year" class="form-control" id="year" th:placeholder="#{specific.modal.year.placeholder}" required>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="cost">Цена($)</label>
-                            <input type="number" name="cost" class="form-control" id="cost" placeholder="Введите цену модели" required>
+                            <label for="cost" th:text="#{specific.modal.price}">Цена($)</label>
+                            <input type="number" name="cost" class="form-control" id="cost" th:placeholder="#{specific.modal.price.placeholder}" required>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="reserve">Запас хода(км)</label>
-                            <input type="number" name="reserve" class="form-control" id="reserve" placeholder="Введите запас хода модели" required>
+                            <label for="reserve" th:text="#{specific.modal.power}">Запас хода(км)</label>
+                            <input type="number" name="reserve" class="form-control" id="reserve" th:placeholder="#{specific.modal.power.placeholder}" required>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="speed">Скорость(км/ч)</label>
-                            <input type="number" name="speed" class="form-control" id="speed" placeholder="Введите скорость модели" required>
+                            <label for="speed" th:text="#{specific.modal.speed}">Скорость(км/ч)</label>
+                            <input type="number" name="speed" class="form-control" id="speed" th:placeholder="#{specific.modal.speed.placeholder}" required>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <button name="subm" class="submit btn btn-primary">Добавить</button>
+                            <button name="subm" class="submit btn btn-primary" th:text="#{button.add}">Добавить</button>
                         </div>
                     </div>
                 </div>
