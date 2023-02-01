@@ -19,4 +19,4 @@ some JQuery for validation.
 
 ## Link to the full set of screenshots of the app
 
-https://telegra.ph/Electro-Inc-Screenshots-11-29
+https://telegra.ph/TeslaProject-Screenshots-01-27
